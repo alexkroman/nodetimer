@@ -1,19 +1,9 @@
-
-/*
- *  Generic require login routing middleware
- */
-
 exports.requiresLogin = function (req, res, next) {
   if (!req.isAuthenticated()) {
     return res.redirect('/login')
   }
   next()
 };
-
-
-/*
- *  User authorizations routing middleware
- */
 
 exports.user = {
     hasAuthorization : function (req, res, next) {
@@ -23,11 +13,6 @@ exports.user = {
       next()
     }
 }
-
-
-/*
- *  Article authorizations routing middleware
- */
 
 exports.timer = {
     hasAuthorization : function (req, res, next) {
