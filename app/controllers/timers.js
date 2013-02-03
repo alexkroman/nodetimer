@@ -5,20 +5,10 @@ var mongoose = require('mongoose')
 
 exports.create = function (req, res) {
   var timer = new Timer(req.body)
-
   timer.user = req.user
 
   timer.save(function(err){
-    if (err) {
-      res.render('timers/new', {
-        title: 'New Timer'
-        , timer: timer
-        , errors: err.errors
-      })
-    }
-    else {
-      res.redirect('/timers')
-    }
+    res.redirect('/')
   })
 }
 
@@ -27,6 +17,13 @@ exports.destroy = function(req, res){
   timer.remove(function(err){
     res.redirect('/')
   })
+}
+
+exports.stop = function(req, res){
+  var timer = req.timer
+  console.log('got here')
+
+    res.redirect('/')
 }
 
 exports.index = function(req, res){

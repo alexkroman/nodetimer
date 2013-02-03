@@ -23,6 +23,7 @@ module.exports = function (app, passport, auth) {
   app.get('/timers', timers.index)
   app.post('/timers', auth.requiresLogin, timers.create)
   app.del('/timers/:id', auth.requiresLogin, auth.timer.hasAuthorization, timers.destroy)
+  app.get('/timers/:id/stop', auth.requiresLogin, auth.timer.hasAuthorization, timers.stop)
 
   app.param('id', timers.timer)
 

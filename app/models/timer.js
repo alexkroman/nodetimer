@@ -16,11 +16,21 @@ TimerSchema
   .set(function(duration) {
     this.endedAt = moment().add('minutes', duration)
   })
+  .get(function(duration) {
+    start = moment(this.createdAt)
+    end = moment(this.endedAt)
+    return moment.humanizeDuration(end.diff(start,'minutes'), 'minutes')
+  })
 
 TimerSchema
   .virtual('timeLeft')
   .get(function(timeLeft) {
     return moment(this.endedAt).fromNow()
   })
+
+TimerSchema.method('stop', function() {
+  this.endedAt = Date();
+  this.save();
+})
 
 mongoose.model('Timer', TimerSchema)
