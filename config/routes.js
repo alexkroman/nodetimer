@@ -20,10 +20,10 @@ module.exports = function (app, passport, auth) {
 
   // timer routes
   var timers = require('../app/controllers/timers')
-  app.get('/timers', timers.index)
-  app.post('/timers', auth.requiresLogin, timers.create)
+  app.get('/timers', auth.requiresLogin, auth.timer.hasAuthorization, timers.index)
+  app.post('/timers', auth.requiresLogin, auth.timer.hasAuthorization, timers.create)
   app.del('/timers/:id', auth.requiresLogin, auth.timer.hasAuthorization, timers.destroy)
-  app.get('/timers/:id/stop', timers.stop)
+  app.post('/timers/:id/stop', auth.requiresLogin, auth.timer.hasAuthorization, timers.stop)
 
   app.param('id', timers.timer)
 

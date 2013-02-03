@@ -20,8 +20,11 @@ exports.destroy = function(req, res){
 }
 
 exports.stop = function(req, res){
-  console.log('STOPPPING')
-  res.redirect('/')
+  var timer = req.timer
+  timer.endedAt = Date();
+  timer.save(function(err){
+    res.redirect('/')
+  })
 }
 
 exports.index = function(req, res){
@@ -59,5 +62,6 @@ exports.timer = function(req, res, next, id){
     .populate('user', 'name')
     .exec(function (err, timer) {
       req.timer = timer
+      next()
     })
 }

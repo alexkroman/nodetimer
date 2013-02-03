@@ -35,9 +35,9 @@ block form
         .span15
           #clock
         .span5
-          a(href='/timers/' + open_timer.id + '/stop')
-            button.btn.btn-primary(type='submit') Stop Timer
-          .body-timer=open_timer.body
+          form(action="/timers/" + open_timer._id + "/stop", method="post")
+            input.btn.btn-primary(type='submit',value="Stop timer") 
+          .body-timer=open_timer.body + '&nbsp;'
 
       script
         // Javascript
@@ -56,26 +56,30 @@ block form
             $(this).html(timeLeft.join(':'));
           });
         });
- 
+     hr 
 
 block content
   .row-fluid.marketing
     .span6
       h3 Started
+      if started_timers == 0
+        p No one is working on anything.
       each timer in started_timers
         .timer
           h4
             a(href="/users/"+timer.user._id)=timer.user.name
-          .body  #{timer.body} 
+          .body  #{timer.body}
           .time-left ending #{timer.timeLeft} 
     .span6
       h3 Finished
+      if ended_timers == 0
+        p No one has finished anything.
       each timer in ended_timers
         .timer
           h4
             a(href="/users/"+timer.user._id)=timer.user.name
           .body  #{timer.body} 
-          .time-left worked #{timer.duration} 
-            form.form-inline.confirm(action="/timers/"+timer.id, method="post",style="display:inline;")
+          .time-left spent #{timer.duration} 
+            form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
               input(type="hidden", name="_method", value="DELETE")
               a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete

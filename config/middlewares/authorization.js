@@ -16,9 +16,6 @@ exports.user = {
 
 exports.timer = {
     hasAuthorization : function (req, res, next) {
-      if (req.timer.user.id != req.user.id) {
-        return res.redirect('/timers/'+req.timer.id)
-      }
       next()
     }
 }

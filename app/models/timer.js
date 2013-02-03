@@ -28,9 +28,4 @@ TimerSchema
     return moment(this.endedAt).fromNow()
   })
 
-TimerSchema.method('stop', function() {
-  this.endedAt = Date();
-  this.save();
-})
-
 mongoose.model('Timer', TimerSchema)
