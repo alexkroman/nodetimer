@@ -1,11 +1,31 @@
 !!! 5
 html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.facebook.com/2008/fbml', itemscope='itemscope', itemtype='http://schema.org/Product')
-  include ../includes/head
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width,initial-scale=1')
+  title= appName+' - '+title
+  meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
+  link(href='/favicon.ico', rel='shortcut icon', type='image/x-icon')
+  link(rel='stylesheet', href='/css/bootstrap.min.css')
+  link(rel="stylesheet", href="/css/jquery.tagsinput.css")
+  link(rel='stylesheet', href='/css/app.css')
+  script(type='text/javascript', src='/js/jquery.min.js')
+  script(type='text/javascript', src='/js/jquery.countdown.min.js')
   body
     .container-narrow
       .masthead
-        include ../includes/header
+        ul.nav.nav-pills.pull-right
+          if (req.isAuthenticated())
+            li
+              a(href="/users/"+req.user.id, title="Profile") Profile
+              li
+                a(href="/logout", title="logout") Logout
+          else
+              li
+                a(href="/login", title="Login") Login
+        h3.muted Node Timer 
       hr
       block form
       hr
       block content
+  script(type='text/javascript', src='/js/bootstrap.min.js')
+  script(type='text/javascript', src='/js/app.js')
