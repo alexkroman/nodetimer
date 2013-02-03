@@ -32,10 +32,12 @@ block form
         button.btn.btn-primary(type='submit') Start Timer
     else
       .row
-        .span20
+        .span14
           #clock
-        .span2
+        .span6
           button.btn.btn-primary(type='submit') Stop Timer
+          .body-timer=open_timer.body
+
       script
         // Javascript
         $(function() {
