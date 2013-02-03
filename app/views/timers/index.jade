@@ -32,9 +32,9 @@ block form
         button.btn.btn-primary(type='submit') Start Timer
     else
       .row
-        .span14
+        .span15
           #clock
-        .span6
+        .span5
           a(href='/timers/' + open_timer.id + '/stop')
             button.btn.btn-primary(type='submit') Stop Timer
           .body-timer=open_timer.body
@@ -42,9 +42,7 @@ block form
       script
         // Javascript
         $(function() {
-          $('div#clock').countdown(new Date('#{open_timer.endedAt}'), function(event) {
-            // Update every second one time only
-            if(event.type != "seconds") return;
+          $('div#clock').countdown(new Date('#{open_timer.endedAt}'), function(event) { // Update every second one time only if(event.type != "seconds") return;
             // Calculate the time left
             var timeLeft = [
               event.lasting.minutes,

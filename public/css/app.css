@@ -21,7 +21,13 @@ body {
 }
 
 #clock {
-  font-size:4em;
+  margin-top:20px;
+  font-size:9em;
+}
+
+.time-left {
+  color:#777;
+
 }
 
 .timer {
