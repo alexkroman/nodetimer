@@ -1,0 +1,39 @@
+extends ../layouts/default
+
+block form
+  - var action = '/timers'
+  if (!timer.isNew)
+    - action += '/'+timer.id
+
+  if (typeof errors !== 'undefined')
+    .fade.in.alert.alert-block.alert-error
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      ul
+        each error in errors
+          li= error.type
+
+  .row
+    .span7
+      form.form-inline(method="post", action=action)
+        input#desc.input-xlarge(type='text', name="body", placeholder='What are you working on?')=timer.body
+        &nbsp; for &nbsp;
+        input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
+        &nbsp; minutes &nbsp;
+        button.btn.btn-primary(type='submit') Start Timer
+
+block content
+  each timer in started_timers
+    .timer
+      h4
+        a(href="/users/"+timer.user._id)=timer.user.name
+      .body  #{timer.body} 
+      .time-left ending #{timer.timeLeft} 
+  each timer in ended_timers
+    .timer
+      h4
+        a(href="/users/"+timer.user._id)=timer.user.name
+      .body  #{timer.body} 
+      .time-left ending #{timer.timeLeft} 
+        form.form-inline.confirm(action="/timers/"+timer.id, method="post",style="display:inline;")
+          input(type="hidden", name="_method", value="DELETE")
+          a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
