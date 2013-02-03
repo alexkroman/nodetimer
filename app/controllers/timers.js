@@ -31,23 +31,28 @@ exports.destroy = function(req, res){
 
 exports.index = function(req, res){
   Timer
-    .find({"endedAt": {"$gte": new Date() }})
+    .find({"endedAt": {"$gt": new Date() }})
     .populate('user', 'name')
     .sort({'endedAt': 1})
-    .limit(25)
+    .limit(10)
     .exec(function(err, started_timers) {
       if (err) return res.render('500')
       Timer
-        .find({"endedAt": {"$lte": new Date() }})
+        .find({"endedAt": {"$lt": new Date() }})
         .populate('user', 'name')
         .sort({'endedAt': -1})
-        .limit(25)
+        .limit(10)
         .exec(function (err, ended_timers) {
-        res.render('timers/index', {
-          title: 'List of Timers'
-          , started_timers: started_timers
-          , ended_timers: ended_timers
-          , timer: new Timer({})
+          Timer
+            .findOne({"user": req.user, "endedAt": {"$gt": new Date() }})
+            .exec(function (err, open_timer) {
+              res.render('timers/index', {
+                title: 'List of Timers'
+                , started_timers: started_timers
+                , ended_timers: ended_timers
+                , open_timer: open_timer
+                , timer: new Timer({})
+              })
         })
       });
     })

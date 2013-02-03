@@ -1,4 +1,14 @@
 extends ../layouts/default
+            
+ul
+  if (req.isAuthenticated())
+    li
+      a(href="/users/"+req.user.id, title="Profile") Profile
+    li
+      a(href="/logout", title="logout") Logout
+  else
+    li
+      a(href="/login", title="Login") Login
 
 block form
   - var action = '/timers'
@@ -12,28 +22,59 @@ block form
         each error in errors
           li= error.type
 
-  .row
-    .span7
+  .jubotron
+    unless open_timer
       form.form-inline(method="post", action=action)
         input#desc.input-xlarge(type='text', name="body", placeholder='What are you working on?')=timer.body
         &nbsp; for &nbsp;
         input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
         &nbsp; minutes &nbsp;
         button.btn.btn-primary(type='submit') Start Timer
+    else
+      .row
+        .span20
+          #clock
+        .span2
+          button.btn.btn-primary(type='submit') Stop Timer
+      script
+        // Javascript
+        $(function() {
+          $('div#clock').countdown(new Date('#{open_timer.endedAt}'), function(event) {
+            // Update every second one time only
+            if(event.type != "seconds") return;
+            // Calculate the time left
+            var timeLeft = [
+              event.lasting.minutes,
+              event.lasting.seconds
+            ];
+            // Convert the number to two digits strings
+            for(var i = 0; i < timeLeft.length; ++i) {
+              timeLeft[i] = (timeLeft[i] < 10 ? '0' : '') + timeLeft[i].toString();
+            }
+            // Concatenate the strings with : and update the html
+            $(this).html(timeLeft.join(':'));
+          });
+        });
+ 
 
 block content
-  each timer in started_timers
-    .timer
-      h4
-        a(href="/users/"+timer.user._id)=timer.user.name
-      .body  #{timer.body} 
-      .time-left ending #{timer.timeLeft} 
-  each timer in ended_timers
-    .timer
-      h4
-        a(href="/users/"+timer.user._id)=timer.user.name
-      .body  #{timer.body} 
-      .time-left ending #{timer.timeLeft} 
-        form.form-inline.confirm(action="/timers/"+timer.id, method="post",style="display:inline;")
-          input(type="hidden", name="_method", value="DELETE")
-          a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
+  .row-fluid.marketing
+    .span6
+      h3 Started
+      each timer in started_timers
+        .timer
+          h4
+            a(href="/users/"+timer.user._id)=timer.user.name
+          .body  #{timer.body} 
+          .time-left ending #{timer.timeLeft} 
+    .span6
+      h3 Finished
+      each timer in ended_timers
+        .timer
+          h4
+            a(href="/users/"+timer.user._id)=timer.user.name
+          .body  #{timer.body} 
+          .time-left ending #{timer.timeLeft} 
+            form.form-inline.confirm(action="/timers/"+timer.id, method="post",style="display:inline;")
+              input(type="hidden", name="_method", value="DELETE")
+              a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
