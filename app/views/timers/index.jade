@@ -36,7 +36,7 @@ block form
           #clock
         .span5
           form(action="/timers/" + open_timer._id + "/stop", method="post")
-            input.btn.btn-primary(type='submit',value="Stop timer") 
+            input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
           .body-timer=open_timer.body + '&nbsp;'
 
       script
@@ -54,6 +54,12 @@ block form
             }
             // Concatenate the strings with : and update the html
             $(this).html(timeLeft.join(':'));
+
+            switch(event.type) {
+              case "finished":
+                soundManager.play('ding');
+              break;
+            }
           });
         });
      hr 
