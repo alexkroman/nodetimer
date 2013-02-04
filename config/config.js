@@ -20,5 +20,10 @@ module.exports = {
         name: 'Node timer'
       },
       db: process.env.MONGOLAB_URI,
+      github: {
+          clientID: 'APP_ID'
+        , clientSecret: 'APP_SECRET'
+        , callbackURL: 'http://localhost:3000/auth/github/callback'
+      },
     }
 }
