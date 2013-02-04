@@ -25,7 +25,9 @@ block form
   .jubotron
     unless open_timer
       form.form-inline(method="post", action=action)
-        input#desc.input-xlarge(type='text', name="body", placeholder='What are you doing?')=timer.body
+        input#desc.input-xlarge(type='text', id="doing", name="body", placeholder='What are you doing?')=timer.body
+        script
+          $('#doing').focus();
         .gray &nbsp; for &nbsp;
         input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
         .gray &nbsp; minutes &nbsp;
@@ -39,6 +41,8 @@ block form
           form(action="/timers/" + open_timer._id + "/stop", method="post")
             .body-timer
               input(type="text", name="body", value=open_timer.body, id="doing", placeholder="What are you doing?", style="width:225px;")
+              script
+                $('#doing').focus();
             input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
       script
         // Javascript
