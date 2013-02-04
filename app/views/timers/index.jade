@@ -36,9 +36,9 @@ block form
           #clock
         .span5
           form(action="/timers/" + open_timer._id + "/stop", method="post")
+            .body-timer
+              input(type="text", name="body", value=open_timer.body)
             input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
-          .body-timer=open_timer.body + '&nbsp;'
-
       script
         // Javascript
         $(function() {
@@ -74,7 +74,7 @@ block content
         .timer
           h4
             a(href="/users/"+timer.user._id)=timer.user.name
-          .body  #{timer.body}
+          .body #{timer.body}
           .time-left ending #{timer.timeLeft} 
     .span6
       h3 Finished
