@@ -38,7 +38,7 @@ block form
         .span2
           form(action="/timers/" + open_timer._id + "/stop", method="post")
             .body-timer
-              input(type="text", name="body", value=open_timer.body, placeholder="What are you doing?", style="width:225px;")
+              input(type="text", name="body", value=open_timer.body, id="doing", placeholder="What are you doing?", style="width:225px;")
             input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
       script
         // Javascript
@@ -58,7 +58,13 @@ block form
 
             switch(event.type) {
               case "finished":
-                soundManager.play('ding');
+                $('#stop-timer').val('Update and start a new timer')
+                $('#doing').attr('placeholder', 'What did you do?')
+                soundManager.play('ding', {
+                  onfinish:function() {
+                    alert('Your timer has ended');
+                  }
+                });
               break;
             }
           });
