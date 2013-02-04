@@ -25,6 +25,5 @@
     , "async": "latest"
     , "nodemon": "latest"
     , "moment": "latest"
-    , "date-utils": "latest"
   }
 }
