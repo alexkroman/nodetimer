@@ -69,21 +69,19 @@ block content
     .span6
       h3 Started
       if started_timers == 0
-        p No one is working on anything.
+        p You aren't working on anything right now.
       each timer in started_timers
         .timer
-          h4
-            a(href="/users/"+timer.user._id)=timer.user.name
+          h4=timer.user.username
           .body #{timer.body}
           .time-left finishing #{timer.timeLeft} 
     .span6
       h3 Finished
       if ended_timers == 0
-        p No one has finished anything.
+        p You haven't finished anything yet.
       each timer in ended_timers
         .timer
-          h4
-            a(href="/users/"+timer.user._id)=timer.user.name
+          h4=timer.user.username
           .body  #{timer.body} 
           .time-left spent #{timer.duration} 
             form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")

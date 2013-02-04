@@ -29,16 +29,19 @@ exports.stop = function(req, res){
 }
 
 exports.index = function(req, res){
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login')
+  }
   Timer
-    .find({"endedAt": {"$gt": new Date() }})
-    .populate('user', 'name')
+    .find({"user": req.user, "endedAt": {"$gt": new Date() }})
+    .populate('user', 'username')
     .sort({'endedAt': 1})
     .limit(10)
     .exec(function(err, started_timers) {
       if (err) return res.render('500')
       Timer
-        .find({"endedAt": {"$lt": new Date() }})
-        .populate('user', 'name')
+        .find({"user": req.user, "endedAt": {"$lt": new Date() }})
+        .populate('user', 'username')
         .sort({'endedAt': -1})
         .limit(10)
         .exec(function (err, ended_timers) {
