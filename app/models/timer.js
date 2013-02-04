@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
 
-var date_utils = require('date-utils')
 var moment = require('moment')
 
 var TimerSchema = new Schema({
