@@ -28,8 +28,16 @@ h3 {
 }
 
 #clock {
-  margin-top:15px;
+  margin-top:25px;
   font-size:6em;
+}
+
+hr.no-top {
+  margin-top:15px;;
+}
+
+.spacer {
+  margin-top: 30px;
 }
 
 .time-left {
@@ -46,4 +54,9 @@ h3 {
 
 .jumbotron {
   text-align:left;
+}
+
+.gray {
+  display:inline;
+  color:#999;
 }

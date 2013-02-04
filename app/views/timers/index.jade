@@ -26,10 +26,11 @@ block form
     unless open_timer
       form.form-inline(method="post", action=action)
         input#desc.input-xlarge(type='text', name="body", placeholder='What are you working on?')=timer.body
-        &nbsp; for &nbsp;
+        .gray &nbsp; for &nbsp;
         input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
-        &nbsp; minutes &nbsp;
+        .gray &nbsp; minutes &nbsp;
         button.btn.btn-primary(type='submit') Start Timer
+        .spacer
     else
       .row
         .span3
@@ -37,7 +38,7 @@ block form
         .span2
           form(action="/timers/" + open_timer._id + "/stop", method="post")
             .body-timer
-              input(type="text", name="body", value=open_timer.body, placeholder="What are you working on?")
+              input(type="text", name="body", value=open_timer.body, placeholder="What are you working on?", style="width:225px;")
             input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
       script
         // Javascript
@@ -64,12 +65,12 @@ block form
         });
 
 block content
-    hr
+    hr(class="no-top")
     each timer in ended_timers
       .timer
         h4=timer.user.username
         .body  #{timer.body} 
-        .time-left spent #{timer.duration} 
+        .time-left for #{timer.duration} 
           form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
             input(type="hidden", name="_method", value="DELETE")
             a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
