@@ -36,7 +36,7 @@ exports.index = function(req, res){
   .find({"user": req.user, "endedAt": {"$lt": new Date() }})
   .populate('user', 'username')
   .sort({'endedAt': -1})
-  .limit(10)
+  .limit(50)
   .exec(function (err, ended_timers) {
     Timer
     .findOne({"user": req.user, "endedAt": {"$gt": new Date() }})
