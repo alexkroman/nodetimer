@@ -6,8 +6,9 @@ block main
 block content
   .row
     .offset1.span5
-      a(href="/auth/github")
-        p Login with Github
+      //
+        a(href="/auth/github")
+            p Login with Github
     .span6
       if (typeof errors !== 'undefined')
         .fade.in.alert.alert-block.alert-error
