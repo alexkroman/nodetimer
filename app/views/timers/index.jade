@@ -32,12 +32,12 @@ block form
         button.btn.btn-primary(type='submit') Start Timer
     else
       .row
-        .span15
+        .span3
           #clock
-        .span5
+        .span2
           form(action="/timers/" + open_timer._id + "/stop", method="post")
             .body-timer
-              input(type="text", name="body", value=open_timer.body)
+              input(type="text", name="body", value=open_timer.body, placeholder="What are you working on?")
             input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
       script
         // Javascript
@@ -62,28 +62,14 @@ block form
             }
           });
         });
-     hr 
 
 block content
-  .row-fluid.marketing
-    .span6
-      h3 Started
-      if started_timers == 0
-        p You aren't working on anything right now.
-      each timer in started_timers
-        .timer
-          h4=timer.user.username
-          .body #{timer.body}
-          .time-left finishing #{timer.timeLeft} 
-    .span6
-      h3 Finished
-      if ended_timers == 0
-        p You haven't finished anything yet.
-      each timer in ended_timers
-        .timer
-          h4=timer.user.username
-          .body  #{timer.body} 
-          .time-left spent #{timer.duration} 
-            form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
-              input(type="hidden", name="_method", value="DELETE")
-              a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
+    hr
+    each timer in ended_timers
+      .timer
+        h4=timer.user.username
+        .body  #{timer.body} 
+        .time-left spent #{timer.duration} 
+          form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
+            input(type="hidden", name="_method", value="DELETE")
+            a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
