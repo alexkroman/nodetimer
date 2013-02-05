@@ -24,7 +24,13 @@ TimerSchema
 TimerSchema
   .virtual('createdAtHumanize')
   .get(function(createdAt) {
-    return moment(this.createdAt).local().calendar().toLowerCase()
+    return moment(this.createdAt).calendar()
+  })
+
+TimerSchema
+  .virtual('createdAtTime')
+  .get(function(createdAtTime) {
+    return moment(this.createdAt).format('h:ma')
   })
 
 TimerSchema
