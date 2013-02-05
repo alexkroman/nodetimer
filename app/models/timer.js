@@ -30,7 +30,7 @@ TimerSchema
 TimerSchema
   .virtual('createdAtTime')
   .get(function(createdAtTime) {
-    return moment(this.createdAt).format('hh:mma')
+    return moment(this.createdAt).format('h:mma')
   })
 
 TimerSchema
