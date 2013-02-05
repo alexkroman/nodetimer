@@ -80,7 +80,7 @@ block content
     - last_timer_heading = 0
     each timer in ended_timers
       .timer
-        - timer_heading = timer.createdAtHumanize.split(' ')[0] 
+        - timer_heading = timer.createdAtHumanize.replace('last','').split(' ')[0] 
         if timer_heading != last_timer_heading
           h3=timer_heading
         - last_timer_heading = timer_heading
