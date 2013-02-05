@@ -80,7 +80,7 @@ block content
       .timer
         h4=timer.user.username
         .body  #{timer.body} 
-        .time-left for #{timer.duration} 
+        .time-left for #{timer.duration} #{timer.createdAtHumanize} 
           form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
             input(type="hidden", name="_method", value="DELETE")
             a.delete(href="#", onclick="$(this).parents('form:first').submit();") remove

@@ -22,6 +22,12 @@ TimerSchema
   })
 
 TimerSchema
+  .virtual('createdAtHumanize')
+  .get(function(createdAt) {
+    return moment(this.createdAt).calendar().toLowerCase()
+  })
+
+TimerSchema
   .virtual('timeLeft')
   .get(function(timeLeft) {
     return moment(this.endedAt).fromNow()
