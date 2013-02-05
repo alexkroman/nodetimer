@@ -25,13 +25,13 @@ block form
   .jubotron
     unless open_timer
       form.form-inline(method="post", action=action)
-        input#desc.input-xlarge(type='text', id="doing", name="body", placeholder='What are you doing?')=timer.body
+        input#desc.input-xlarge(type='text', id="doing", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
         script
           $('#doing').focus();
         .gray &nbsp; for &nbsp;
         input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
         .gray &nbsp; minutes &nbsp;
-        button.btn.btn-primary(type='submit') Start Timer
+        button.btn.btn-primary(type='submit') Start
         .spacer
     else
       .row
@@ -43,7 +43,7 @@ block form
               input(type="text", name="body", value=open_timer.body, id="doing", placeholder="What are you doing?", style="width:225px;")
               script
                 $('#doing').focus();
-            input.btn.btn-primary(id="stop-timer", type='submit',value="Stop timer") 
+            input.btn.btn-primary(id="stop-timer", type='submit',value="Stop") 
       script
         // Javascript
         $(function() {
@@ -62,7 +62,7 @@ block form
 
             switch(event.type) {
               case "finished":
-                $('#stop-timer').val('Update and start a new timer')
+                $('#stop-timer').val('Update')
                 $('#doing').attr('placeholder', 'What did you do?')
                 soundManager.play('ding', {
                   onfinish:function() {
@@ -83,4 +83,4 @@ block content
         .time-left for #{timer.duration} 
           form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
             input(type="hidden", name="_method", value="DELETE")
-            a.delete(href="#", onclick="$(this).parents('form:first').submit();") delete
+            a.delete(href="#", onclick="$(this).parents('form:first').submit();") remove

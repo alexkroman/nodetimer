@@ -42,7 +42,7 @@ exports.index = function(req, res){
     .findOne({"user": req.user, "endedAt": {"$gt": new Date() }})
     .exec(function (err, open_timer) {
       res.render('timers/index', {
-        title: 'List of Timers'
+        title: 'Your timers'
         , ended_timers: ended_timers
         , open_timer: open_timer
         , timer: new Timer({})
