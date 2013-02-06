@@ -22,28 +22,30 @@ block form
         each error in errors
           li= error.type
 
-  .jubotron
+  #jubotron
     unless open_timer
+      #clock
       form.form-inline(method="post", action=action)
         input#desc.input-xlarge(type='text', id="doing", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
         script
           $('#doing').focus();
+        br
+        br
+        button.btn.btn-primary(type='submit') Start
         .gray &nbsp; for &nbsp;
         input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
         .gray &nbsp; minutes &nbsp;
-        button.btn.btn-primary(type='submit') Start
         .spacer
     else
-      .row
-        .span3
-          #clock
-        .span2
-          form(action="/timers/" + open_timer._id + "/stop", method="post")
-            .body-timer
-              input(type="text", name="body", value=open_timer.body, id="doing", placeholder="What are you doing?", style="width:225px;")
-              script
-                $('#doing').focus();
-            input.btn.btn-primary(id="stop-timer", type='submit',value="Stop") 
+      #clock
+      br
+      br
+      form(action="/timers/" + open_timer._id + "/stop", method="post")
+        .body-timer
+          input#desc.input-xlarge(type="text", name="body", value=open_timer.body, id="doing", placeholder="What are you doing?")
+          script
+            $('#doing').focus();
+        input.btn.btn-primary(id="stop-timer", type='submit',value="Stop") 
       script
         // Javascript
         $(function() {
@@ -75,7 +77,7 @@ block form
         });
 
 block content
-    hr(class="no-top")
+    hr
     - timer_heading = ''
     - last_timer_heading = 0
     each timer in ended_timers
