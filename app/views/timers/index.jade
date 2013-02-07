@@ -25,14 +25,14 @@ block form
   #jubotron
     unless open_timer
       form.form-inline(method="post", action=action)
-        input#desc(type='text', id="doing", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
+        input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
         script
           $('#doing').focus();
         br
         br
-        button.btn.btn-primary(type='submit') Start
+        button.btn.btn-primary(type='submit', tabindex="3") Start
         .gray &nbsp; for &nbsp;
-        input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;')=timer.body
+        input#desc.input-small(type='text', tabindex="2", name="duration", value="25", style='text-align:center;width:18px;')=timer.body
         .gray &nbsp; minutes &nbsp;
     else
       form.form-inline(action="/timers/" + open_timer._id + "/stop", method="post")
@@ -41,7 +41,7 @@ block form
         br
         .body-timer
           input.btn.btn-danger(id="stop-timer", name="action", type='submit',value="Stop") 
-          input.btn.btn-primary(type="submit", name="action", id="start-timer", value="Start again") 
+          input.btn.btn-primary(type="button", onclick="window.location.href='/'", name="action", id="start-timer", value="Start again") 
           &nbsp;&nbsp; 
           .interruption=open_timer.body
       script
