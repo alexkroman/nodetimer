@@ -40,7 +40,7 @@ block form
         br
         br
         .body-timer
-          input.btn.btn-danger(id="stop-timer", name="action", type='submit',value="Interruption") 
+          input.btn.btn-danger(id="stop-timer", name="action", type='submit',value="Stop") 
           input.btn.btn-primary(type="submit", name="action", id="start-timer", value="Start again") 
           &nbsp;&nbsp; 
           .interruption=open_timer.body
@@ -66,7 +66,7 @@ block form
                 $('#start-timer').show();
                 soundManager.play('ding', {
                   onfinish:function() {
-                    alert('Nice work! Your timer has ended');
+                    alert('Nice work! Your stayed focused.');
 
                   }
                 });
