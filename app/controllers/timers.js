@@ -21,7 +21,6 @@ exports.destroy = function(req, res){
 
 exports.stop = function(req, res){
   var timer = req.timer
-  timer = _.extend(timer, req.body)
   timer.endedAt = Date();
   timer.save(function(err){
     res.redirect('/')

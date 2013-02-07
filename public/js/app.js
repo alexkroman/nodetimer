@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   soundManager.setup({
 
     url: '/js/soundmanager2.swf',

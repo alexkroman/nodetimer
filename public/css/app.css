@@ -52,6 +52,8 @@ h3.content {
   display:inline;
 }
 
+#start-timer{display:none;}
+
 #clock {
   margin-top:30px;
   margin-bottom:3px;
