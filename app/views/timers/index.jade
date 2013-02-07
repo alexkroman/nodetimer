@@ -39,9 +39,10 @@ block form
         #clock
         br
         br
-        input.btn.btn-danger.center(id="stop-timer", type='submit',value="Interruption") 
-        &nbsp;&nbsp; 
-        .interruption=open_timer.body
+        .body-timer
+          input.btn.btn-danger.center(id="stop-timer", type='submit',value="Interruption") 
+          &nbsp;&nbsp; 
+          .interruption=open_timer.body
       script
         // Javascript
         $(function() {

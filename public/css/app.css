@@ -48,14 +48,14 @@ h3.content {
 }
 
 .interruption {
-  line-height:2.8em;
+  line-height:2.6em;
   display:inline;
 }
 
 #clock {
-  margin-top:20px;
+  margin-top:30px;
   margin-bottom:3px;
-  font-size:7.5em;
+  font-size:7.7em;
 }
 
 h2 {
@@ -73,12 +73,6 @@ hr.no-top {
 
 .time-left {
   color:#777;
-}
-
-.body-timer {
-  margin-top:10px;
-  line-height:1.4em;
-  margin-bottom:10px;
 }
 
 .timer {
@@ -100,9 +94,9 @@ hr.no-top {
 
 .box {
   max-width: 300px;
-  padding: 24px 29px 14px;
+  padding: 24px 29px 3px;
   margin: 0 auto 20px;
-  margin-top:7px;
+  margin-top:9px;
   background-color: #fff;
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 5px;
