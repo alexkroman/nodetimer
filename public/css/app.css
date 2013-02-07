@@ -24,7 +24,7 @@ h3.content {
 }
 
 #doing {
-  width:253px;
+  width:263px;
 }
 
 .nav {
@@ -92,8 +92,8 @@ hr.no-top {
 }
 
 .box {
-  max-width: 300px;
-  padding: 24px 29px 3px;
+  max-width: 290px;
+  padding: 24px 20px 3px;
   margin: 0 auto 20px;
   margin-top:9px;
   background-color: #fff;
