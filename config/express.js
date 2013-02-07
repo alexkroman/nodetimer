@@ -3,6 +3,8 @@
  * Module dependencies.
  */
 
+require('newrelic');
+
 var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
