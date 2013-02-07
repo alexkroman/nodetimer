@@ -13,17 +13,17 @@ html
   body
     .container-narrow
       .masthead
-        ul.nav.nav-pills.pull-right
+        ul.nav.pull-right
           if (req.isAuthenticated())
             li
               a(href="/logout", title="logout") Logout
           else
             li
               a(href="/login", title="Login") Login
-        h3.muted 
+        h3.title.muted 
            a(href="/") Node Timer
-      hr
-      block form
-      block content
+      .box
+        block form
+        block content
   script(type='text/javascript', src='/js/bootstrap.min.js')
   script(type='text/javascript', src='/js/app.js')

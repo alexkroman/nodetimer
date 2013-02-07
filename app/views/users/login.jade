@@ -2,22 +2,13 @@ extends auth
 
 
 block auth
-  h2 Figure out where your time goes with Node Timer.
-  .spacer
-  form.login.form-horizontal(action="/users/session", method="post")
+  form(action="/users/session", method="post")
+    h2.form-signin-heading Please login
     p.error= message
-    .control-group
-      label.control-label(for='email') Email
-      .controls
-        input#email(type='text', name="email", placeholder='Email')
-
-    .control-group
-      label.control-label(for='password') Password
-      .controls
-        input#password(type='password', name="password", placeholder='Password')
-
-    .form-actions
-      button.btn.btn-primary(type='submit') Login
-      &nbsp;
-      | or&nbsp;
-      a.show-signup(href="/signup") sign up
+    input.input-block-level#email(type='text', name="email", placeholder='Email address')
+    input.input-block-level#password(type='password', name="password", placeholder='Password')
+    br
+    button.btn.btn-large.btn-primary(type='submit') Login
+    &nbsp;
+    | or&nbsp;
+    a.show-signup(href="/signup") sign up

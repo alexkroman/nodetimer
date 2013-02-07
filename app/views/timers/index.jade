@@ -24,28 +24,24 @@ block form
 
   #jubotron
     unless open_timer
-      #clock
       form.form-inline(method="post", action=action)
-        input#desc.input-xlarge(type='text', id="doing", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
+        input#desc(type='text', id="doing", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
         script
           $('#doing').focus();
         br
         br
-        button.btn.btn-primary(type='submit') Start
+        button.btn.btn-primary(type='submit') Focus
         .gray &nbsp; for &nbsp;
-        input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;', placeholder='How long?')=timer.body
+        input#desc.input-small(type='text', name="duration", value="25", style='text-align:center;width:18px;')=timer.body
         .gray &nbsp; minutes &nbsp;
-        .spacer
     else
-      #clock
-      br
-      br
-      form(action="/timers/" + open_timer._id + "/stop", method="post")
-        .body-timer
-          input#desc.input-xlarge(type="text", name="body", value=open_timer.body, id="doing", placeholder="What are you doing?")
-          script
-            $('#doing').focus();
-        input.btn.btn-primary(id="stop-timer", type='submit',value="Stop") 
+      form.form-inline(action="/timers/" + open_timer._id + "/stop", method="post")
+        #clock
+        br
+        br
+        input.btn.btn-danger.center(id="stop-timer", type='submit',value="Interruption") 
+        &nbsp;&nbsp; 
+        .interruption=open_timer.body
       script
         // Javascript
         $(function() {
@@ -64,11 +60,10 @@ block form
 
             switch(event.type) {
               case "finished":
-                $('#stop-timer').val('Update')
-                $('#doing').attr('placeholder', 'What did you do?')
                 soundManager.play('ding', {
                   onfinish:function() {
                     alert('Your timer has ended');
+
                   }
                 });
               break;
@@ -77,14 +72,13 @@ block form
         });
 
 block content
-    hr.no-top
     - timer_heading = ''
     - last_timer_heading = 0
     each timer in ended_timers
       .timer
         - timer_heading = timer.createdAtHumanize.replace('last ','').split(' ')[0]
         if timer_heading != last_timer_heading
-          h3=timer_heading
+          h3.content=timer_heading
         - last_timer_heading = timer_heading
         
         h4=timer.user.username
