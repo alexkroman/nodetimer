@@ -52,6 +52,7 @@ h3.content {
 #start-timer{display:none;}
 
 #clock {
+  text-align:center;
   margin-top:30px;
   margin-bottom:3px;
   font-size:7.7em;
