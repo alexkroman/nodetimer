@@ -24,7 +24,7 @@
     , "gzippo": "latest"
     , "async": "latest"
     , "nodemon": "latest"
-    , "moment": "latest"
+    , "moment": "1.6.0"
     , "newrelic": "latest"
   }
 }

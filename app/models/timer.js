@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
-
-var moment = require('moment')
+  , moment = require('moment')
 
 var TimerSchema = new Schema({
   body: {type : String, default : '', trim : true}
