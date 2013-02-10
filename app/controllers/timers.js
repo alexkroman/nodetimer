@@ -31,8 +31,17 @@ exports.index = function(req, res){
   if (!req.isAuthenticated()) {
     return res.redirect('/login')
   }
+  options = {
+    "endedAt": {"$lt": new Date() }
+    , "user": req.user 
+  }
+
+  if (req.query['find'] == 'all') {
+    delete options["user"] 
+  }
+
   Timer
-  .find({"user": req.user, "endedAt": {"$lt": new Date() }})
+  .find(options)
   .populate('user', 'username')
   .sort({'endedAt': -1})
   .limit(50)
