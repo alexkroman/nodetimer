@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
   , Timer = mongoose.model('Timer')
   , _ = require('underscore')
 
-var limit = 25;
+var limit = 80;
  
 exports.create = function (req, res) {
   var timer = new Timer(req.body)
