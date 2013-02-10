@@ -18,6 +18,7 @@ module.exports = function (app, config, passport) {
   app.set('view engine', 'jade')
 
   app.configure(function () {
+
     // dynamic helpers
     app.use(viewHelpers(config))
 

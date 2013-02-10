@@ -1,8 +1,11 @@
 var mongoose = require('mongoose')
   , async = require('async')
+  , pagination = require('mongoose-pagination')
   , Timer = mongoose.model('Timer')
   , _ = require('underscore')
 
+var limit = 25;
+ 
 exports.create = function (req, res) {
   var timer = new Timer(req.body)
   timer.user = req.user
@@ -31,6 +34,7 @@ exports.index = function(req, res){
   if (!req.isAuthenticated()) {
     return res.redirect('/login')
   }
+
   options = {
     "endedAt": {"$lt": new Date() }
     , "user": req.user 
@@ -40,17 +44,35 @@ exports.index = function(req, res){
     delete options["user"] 
   }
 
+  if (req.query['page']) {
+    page = parseInt(req.query['page'])
+  } else {
+    page = 1
+  }
+
+  num = page * limit
+
   Timer
   .find(options)
   .populate('user', 'username')
   .sort({'endedAt': -1})
-  .limit(50)
-  .exec(function (err, ended_timers) {
+  .find()
+  .paginate(page, limit, function (err, ended_timers, total) {
+    console.log(total)
     Timer
     .findOne({"user": req.user, "endedAt": {"$gt": new Date() }})
     .exec(function (err, open_timer) {
+      next = (num < total) ? true : false
+      prev = (num > limit) ? true : false
+      console.log('prev' + prev + 'next' + next)
+      
       res.render('timers/index', {
         title: 'Your timers'
+        , page: page
+        , prev: prev
+        , next: next
+        , next_page: page + 1
+        , prev_page: page - 1
         , ended_timers: ended_timers
         , open_timer: open_timer
         , timer: new Timer({})

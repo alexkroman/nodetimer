@@ -26,5 +26,6 @@
     , "nodemon": "latest"
     , "moment": "1.6.0"
     , "newrelic": "latest"
+    , "mongoose-pagination": "latest"
   }
 }

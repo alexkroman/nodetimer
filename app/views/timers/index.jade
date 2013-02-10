@@ -89,3 +89,8 @@ block content
           form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
             input(type="hidden", name="_method", value="DELETE")
             a.delete(href="#", onclick="$(this).parents('form:first').submit();") remove
+    p
+      - if (prev)
+        a(href="?page=#{prev_page}") Previous
+      - if (next)
+        a(href="?page=#{next_page}") Next
