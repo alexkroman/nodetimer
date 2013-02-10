@@ -27,7 +27,7 @@ block form
       form.form-inline(method="post", action=action)
         input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
         script
-          $('#doing').focus();
+          $('#doing').focus().select();
         br
         br
         button.btn.btn-primary(type='submit', tabindex="3") Start
