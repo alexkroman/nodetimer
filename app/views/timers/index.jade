@@ -90,9 +90,9 @@ block content
             input(type="hidden", name="_method", value="DELETE")
             a.delete(href="#", onclick="$(this).parents('form:first').submit();") remove
     p
-      - if (prev)
-        a(href="?page=#{prev_page}") Previous
-      - if (prev && next) 
-        &nbsp;|&nbsp;
       - if (next)
-        a(href="?page=#{next_page}") Next
+        a(href="?page=#{next_page}") &laquo; Earlier
+      - if (prev && next) 
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      - if (prev)
+        a(href="?page=#{prev_page}") Later &raquo;
