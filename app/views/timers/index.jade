@@ -91,8 +91,8 @@ block content
             a.delete(href="#", class='delete', onclick="$(this).parents('form:first').submit();") delete
     p
       - if (next)
-        a(href="?page=#{next_page}") &laquo; Earlier
+        a(href="?page=#{next_page}") &laquo; earlier
       - if (prev && next) 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       - if (prev)
-        a(href="?page=#{prev_page}") Later &raquo;
+        a(href="?page=#{prev_page}") later &raquo;
