@@ -40,16 +40,7 @@ exports.index = function(req, res){
     , "user": req.user 
   }
 
-  if (req.query['find'] == 'all') {
-    delete options["user"] 
-  }
-
-  if (req.query['page']) {
-    page = parseInt(req.query['page'])
-  } else {
-    page = 1
-  }
-
+  page = parseInt(req.query['page']) || 1
   num = page * limit
 
   Timer

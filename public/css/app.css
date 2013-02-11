@@ -119,3 +119,8 @@ hr.no-top {
   margin-bottom: 15px;
   padding: 7px 9px;
 }
+
+.delete {
+  color:#aaa;
+  margin-left:4px;
+}

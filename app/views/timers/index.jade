@@ -83,12 +83,11 @@ block content
           h3.content=timer_heading
         - last_timer_heading = timer_heading
         
-        h4=timer.user.username
-        .body  #{timer.body} 
+        h4=timer.body || '[no title]'
         .time-left for #{timer.duration} at #{timer.createdAtTime} 
           form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
             input(type="hidden", name="_method", value="DELETE")
-            a.delete(href="#", onclick="$(this).parents('form:first').submit();") remove
+            a.delete(href="#", class='delete', onclick="$(this).parents('form:first').submit();") delete
     p
       - if (next)
         a(href="?page=#{next_page}") &laquo; Earlier
