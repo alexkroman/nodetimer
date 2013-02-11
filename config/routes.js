@@ -7,8 +7,6 @@ module.exports = function (app, passport, auth) {
   var timers = require('../app/controllers/timers')
   var users = require('../app/controllers/users')
 
-  app.get('*', timers.redirect)
-
   // user routes
   app.get('/login', users.login)
   app.get('/signup', users.signup)
