@@ -4,9 +4,12 @@ var mongoose = require('mongoose')
   , async = require('async')
 
 module.exports = function (app, passport, auth) {
+  var timers = require('../app/controllers/timers')
+  var users = require('../app/controllers/users')
+
+  app.get('*', timers.redirect)
 
   // user routes
-  var users = require('../app/controllers/users')
   app.get('/login', users.login)
   app.get('/signup', users.signup)
   app.get('/logout', users.logout)
@@ -19,7 +22,6 @@ module.exports = function (app, passport, auth) {
   app.param('userId', users.user)
 
   // timer routes
-  var timers = require('../app/controllers/timers')
   app.get('/timers', auth.requiresLogin, auth.timer.hasAuthorization, timers.index)
   app.post('/timers', auth.requiresLogin, auth.timer.hasAuthorization, timers.create)
   app.del('/timers/:id', auth.requiresLogin, auth.timer.hasAuthorization, timers.destroy)
@@ -29,7 +31,5 @@ module.exports = function (app, passport, auth) {
 
   // home route
   app.get('/', timers.index)
-
-  app.get('/*', timers.redirect)
 
 }
