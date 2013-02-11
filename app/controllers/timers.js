@@ -81,3 +81,13 @@ exports.timer = function(req, res, next, id){
       next()
     })
 }
+
+exports.redirect = function(req, res) {
+  if (req.headers.host.match(/^www/) !== null ) {
+    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
+  } else if (req.headers.host.match(/^salty-bayou-8086/) !== null) {
+    res.redrect('http://nodetimer.com');
+  } else {
+    next();
+  }
+}
