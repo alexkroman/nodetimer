@@ -58,7 +58,7 @@ exports.index = function(req, res){
       console.log('prev' + prev + 'next' + next)
       
       res.render('timers/index', {
-        title: 'Your timers'
+        title: 'Timers'
         , page: page
         , prev: prev
         , next: next

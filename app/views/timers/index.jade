@@ -58,6 +58,7 @@ block form
             }
             // Concatenate the strings with : and update the html
             $(this).html(timeLeft.join(':'));
+            document.title = timeLeft.join(':') + ' - Node Timer';
 
             switch(event.type) {
               case "finished":
