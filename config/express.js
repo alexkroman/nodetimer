@@ -31,7 +31,8 @@ module.exports = function (app, config, passport) {
 
     // express/mongo session storage
     app.use(express.session({
-      secret: 'noobjs',
+      secret: 'node-timer-alexkroman',
+      expires: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), 
       store: new mongoStore({
         url: config.db,
         collection : 'sessions'
