@@ -1,26 +1,9 @@
 extends ../layouts/default
-            
-ul
-  if (req.isAuthenticated())
-    li
-      a(href="/users/"+req.user.id, title="Profile") Profile
-    li
-      a(href="/logout", title="logout") Logout
-  else
-    li
-      a(href="/login", title="Login") Login
 
 block form
   - var action = '/timers'
   if (!timer.isNew)
     - action += '/'+timer.id
-
-  if (typeof errors !== 'undefined')
-    .fade.in.alert.alert-block.alert-error
-      a.close(data-dismiss="alert", href="javascript:void(0)") x
-      ul
-        each error in errors
-          li= error.type
 
   #jubotron
     unless open_timer
@@ -58,7 +41,7 @@ block form
             }
             // Concatenate the strings with : and update the html
             $(this).html(timeLeft.join(':'));
-            document.title = timeLeft.join(':') + ' - #{open_timer.body} - Node Timer';
+            document.title = timeLeft.join(':') + " - #{open_timer.body} - Node Timer";
 
             switch(event.type) {
               case "finished":
