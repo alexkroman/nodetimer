@@ -60,6 +60,8 @@ block form
 block content
     - timer_heading = ''
     - last_timer_heading = 0
+    each tag in tags
+      p=tag['_id'] + ' ' + tag['value']
     each timer in ended_timers
       .timer
         - timer_heading = timer.createdAtHumanize.replace('last ','').split(' ')[0]

@@ -66,18 +66,21 @@ exports.index = function(req, res){
       next = (num < total) ? true : false
       prev = (num > limit) ? true : false
       console.log('prev' + prev + 'next' + next)
-      
+      Timer.tags(function (err, tags) {
+      console.log(tags)
       res.render('timers/index', {
         title: 'Timers'
         , page: page
         , prev: prev
         , next: next
+        , tags: tags
         , next_page: page + 1
         , prev_page: page - 1
         , ended_timers: ended_timers
         , open_timer: open_timer
         , timer: new Timer({})
       })
+})      
     })
   });
 }
