@@ -50,20 +50,21 @@ TimerSchema.statics.tags = function(callback) {
     if (!this.tags) {
       return;
     }
-
+     
     for (index in this.tags) {
-      emit(this.tags[index], 1);
+      emit(this.tags[index], {count: 1, duration: Math.floor((Math.abs(this.endedAt - this.createdAt)/1000)/60) + 1});
     }
   }
 
   var reduceFunction = function(previous, current) {
-    var count = 0;
+    var result = {count : 0, duration: 0}
 
     for (index in current) {
-        count += current[index];
+        result.count += current[index].count;
+        result.duration += current[index].duration;
     }
 
-    return count;
+    return result;
   }
 
   this.collection.mapReduce(
