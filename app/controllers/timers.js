@@ -47,7 +47,7 @@ exports.index = function(req, res){
 
   options = {
     "endedAt": {"$lt": new Date() }
-    , "user": req.user 
+    , "user": req.user._id 
   }
 
   page = parseInt(req.query['page']) || 1
@@ -66,7 +66,7 @@ exports.index = function(req, res){
       next = (num < total) ? true : false
       prev = (num > limit) ? true : false
       console.log('prev' + prev + 'next' + next)
-      Timer.tags(function (err, tags) {
+      Timer.tags(options, function (err, tags) {
       console.log(tags)
       res.render('timers/index', {
         title: 'Timers'

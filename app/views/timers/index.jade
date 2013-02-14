@@ -60,8 +60,6 @@ block form
 block content
     - timer_heading = ''
     - last_timer_heading = 0
-    each tag in tags
-      p=tag['_id'] + ' total:' + tag['value']['count'] + ' duration:' + tag['value']['duration']
     each timer in ended_timers
       .timer
         - timer_heading = timer.createdAtHumanize.replace('last ','').split(' ')[0]
@@ -81,3 +79,10 @@ block content
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       - if (prev)
         a(href="?page=#{prev_page}") later &raquo;
+
+block tags
+  each tag in tags
+    p
+      =tag['_id'] 
+      br
+      span.small=tag['value']['count'] + ' timers for ' + tag['value']['duration'] + ' minutes today'

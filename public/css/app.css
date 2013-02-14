@@ -24,7 +24,7 @@ h3.content {
 }
 
 #doing {
-  width:263px;
+  width:247px;
 }
 
 .nav {
@@ -32,16 +32,12 @@ h3.content {
   padding-right:5px;
 }
 
-.container-narrow {
-  margin: 0 auto;
-  max-width: 315px;
-}
-.container-narrow > hr {
-  margin: 30px 0;
-}
+.tags {
+  margin-top:50px;
+  margin-left:-45px;
+  color: #777;
+  font-size:.8.9em;
 
-.container {
-  padding-top: 60px;
 }
 
 .interruption {
@@ -94,7 +90,6 @@ hr.no-top {
 }
 
 .box {
-  max-width: 290px;
   padding: 24px 20px 3px;
   margin: 0 auto 20px;
   margin-top:9px;
@@ -128,4 +123,9 @@ hr.no-top {
 
 h4 {
   font-weight: normal;
+}
+
+.small {
+  display:inline;
+  font-size:.8em;
 }

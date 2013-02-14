@@ -44,7 +44,7 @@ TimerSchema
     return moment(this.endedAt).fromNow()
   })
 
-TimerSchema.statics.tags = function(callback) {
+TimerSchema.statics.tags = function(options, callback) {
 
   var mapFunction = function() {
     if (!this.tags) {
@@ -70,7 +70,7 @@ TimerSchema.statics.tags = function(callback) {
   this.collection.mapReduce(
     mapFunction.toString(),
     reduceFunction.toString(),
-    { query: {}, out: { inline: 1 } },
+    { query: options, out: { inline: 1 } },
     callback
   );
 }
