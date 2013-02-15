@@ -58,8 +58,10 @@ block form
         });
 
 block content
-  if ended_timers.length > 0
     .well
+      if ended_timers.length == 0
+        h3 Today
+        p No timers have gone off yet :(
       - timer_heading = ''
       - last_timer_heading = 0
       each timer in ended_timers
@@ -83,9 +85,10 @@ block content
           a(href="?page=#{prev_page}") later &raquo;
 
 block tags
-  if tags.length > 0
     .well
       h3 Today's Trends
+      if tags.length == 0
+        p Use #hash #tags to track trends.
       each tag in tags
         p
           h4=tag['_id'] 
