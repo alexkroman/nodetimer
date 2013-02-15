@@ -11,23 +11,24 @@ html
   script(type='text/javascript', src='/js/jquery.countdown.min.js')
   script(type='text/javascript', src='/js/soundmanager2-jsmin.js')
   body
-    .row
-       .span12
-         .span4.offset7
-          .masthead
-            ul.nav.pull-right
-              if (req.isAuthenticated())
-                li
-                  a(href="/logout", title="logout") Log out
-              else
-                li
-                  a(href="/login", title="Login") Login
-            h3.title.muted 
-               a(href="/") Node Timer
-          .box
-            block form
-            block content
-        .span3.tags
-          block tags
+    .container
+      ul.nav.pull-right
+        if (req.isAuthenticated())
+          li
+            a(href="/logout", title="logout") Log out
+        else
+          li
+            a(href="/login", title="Login") Login
+      h3.title.muted 
+         a(href="/") Node Timer
+      .row-fluid
+        .span12
+          .span6
+            .well
+              block form
+              block tags
+          .span6
+            .well
+              block content
   script(type='text/javascript', src='/js/bootstrap.min.js')
   script(type='text/javascript', src='/js/app.js')
