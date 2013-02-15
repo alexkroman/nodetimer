@@ -1,13 +1,14 @@
 extends auth
 
 block auth
-  form(action="/users", method="post")
-    h2.form-signin-heading Please signup
-    input.input-block-level#name(type='text', name="name", placeholder='Full name', value=user.name)
-    input.input-block-level#email(type='text', name="email", placeholder='Email', value=user.email)
-    input.input-block-level#username(type='text', name="username", placeholder='Username', value=user.username)
-    input.input-block-level#password(type='password', name="password", placeholder='Password')
-    button.btn.btn-primary(type='submit') Sign up
-    &nbsp;
-    | or&nbsp;
-    a.show-login(href="/login") login
+  .well
+    form(action="/users", method="post")
+      h2.form-signin-heading Please signup
+      input.input-block-level#name(type='text', name="name", placeholder='Full name', value=user.name)
+      input.input-block-level#email(type='text', name="email", placeholder='Email', value=user.email)
+      input.input-block-level#username(type='text', name="username", placeholder='Username', value=user.username)
+      input.input-block-level#password(type='password', name="password", placeholder='Password')
+      button.btn.btn-primary(type='submit') Sign up
+      &nbsp;
+      | or&nbsp;
+      a.show-login(href="/login") login

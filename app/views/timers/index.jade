@@ -1,87 +1,92 @@
 extends ../layouts/default
 
 block form
-  - var action = '/timers'
-  if (!timer.isNew)
-    - action += '/'+timer.id
+  .well
+    - var action = '/timers'
+    if (!timer.isNew)
+      - action += '/'+timer.id
 
-  unless open_timer
-    form.form-inline(method="post", action=action)
-      input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing? #hash #tags')=timer.body
+    unless open_timer
+      form.form-inline(method="post", action=action)
+        input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing? #hash #tags')=timer.body
+        script
+          $('#doing').focus().select();
+        br
+        br
+        button.btn.btn-primary(type='submit', tabindex="3") Start
+        .gray &nbsp; for &nbsp;
+        input#desc.input-small(type='text', tabindex="2", name="duration", value="25", style='text-align:center;width:18px;')=timer.body
+        .gray &nbsp; minutes &nbsp;
+    else
+      form.form-inline(action="/timers/" + open_timer._id + "/stop", method="post")
+        #clock
+        br
+        br
+        .body-timer
+          input.btn.btn-danger(id="stop-timer", name="action", type='submit',value="Stop") 
+          &nbsp;&nbsp; 
+          .interruption=open_timer.body
       script
-        $('#doing').focus().select();
-      br
-      br
-      button.btn.btn-primary(type='submit', tabindex="3") Start
-      .gray &nbsp; for &nbsp;
-      input#desc.input-small(type='text', tabindex="2", name="duration", value="25", style='text-align:center;width:18px;')=timer.body
-      .gray &nbsp; minutes &nbsp;
-  else
-    form.form-inline(action="/timers/" + open_timer._id + "/stop", method="post")
-      #clock
-      br
-      br
-      .body-timer
-        input.btn.btn-danger(id="stop-timer", name="action", type='submit',value="Stop") 
-        &nbsp;&nbsp; 
-        .interruption=open_timer.body
-    script
-      // Javascript
-      $(function() {
-        $('div#clock').countdown(new Date('#{open_timer.endedAt}'), function(event) { // Update every second one time only if(event.type != "seconds") return;
-          // Calculate the time left
-          var timeLeft = [
-            event.lasting.minutes,
-            event.lasting.seconds
-          ];
-          // Convert the number to two digits strings
-          for(var i = 0; i < timeLeft.length; ++i) {
-            timeLeft[i] = (timeLeft[i] < 10 ? '0' : '') + timeLeft[i].toString();
-          }
-          // Concatenate the strings with : and update the html
-          $(this).html(timeLeft.join(':'));
-          document.title = timeLeft.join(':') + " - #{open_timer.body} - Node Timer";
+        // Javascript
+        $(function() {
+          $('div#clock').countdown(new Date('#{open_timer.endedAt}'), function(event) { // Update every second one time only if(event.type != "seconds") return;
+            // Calculate the time left
+            var timeLeft = [
+              event.lasting.minutes,
+              event.lasting.seconds
+            ];
+            // Convert the number to two digits strings
+            for(var i = 0; i < timeLeft.length; ++i) {
+              timeLeft[i] = (timeLeft[i] < 10 ? '0' : '') + timeLeft[i].toString();
+            }
+            // Concatenate the strings with : and update the html
+            $(this).html(timeLeft.join(':'));
+            document.title = timeLeft.join(':') + " - #{open_timer.body} - Node Timer";
 
-          switch(event.type) {
-            case "finished":
-              $('#stop-timer').hide();
-              soundManager.play('ding', {
-                onfinish:function() {
-                  alert('Your timer has ended.');
-                  location.reload();
-                }
-              });
-            break;
-          }
+            switch(event.type) {
+              case "finished":
+                $('#stop-timer').hide();
+                soundManager.play('ding', {
+                  onfinish:function() {
+                    alert('Your timer has ended.');
+                    location.reload();
+                  }
+                });
+              break;
+            }
+          });
         });
-      });
 
 block content
-    - timer_heading = ''
-    - last_timer_heading = 0
-    each timer in ended_timers
-      .timer
-        - timer_heading = timer.createdAtHumanize.replace('last ','').split(' ')[0]
-        if timer_heading != last_timer_heading
-          h3.content=timer_heading
-        - last_timer_heading = timer_heading
-        
-        h4=timer.body || '[no title]'
-        .time-left for #{timer.duration} at #{timer.createdAtTime} 
-          form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
-            input(type="hidden", name="_method", value="DELETE")
-            a.delete(href="#", class='delete', onclick="$(this).parents('form:first').submit();") delete
-    p
-      - if (next)
-        a(href="?page=#{next_page}") &laquo; earlier
-      - if (prev && next) 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      - if (prev)
-        a(href="?page=#{prev_page}") later &raquo;
+  if ended_timers.length > 0
+    .well
+      - timer_heading = ''
+      - last_timer_heading = 0
+      each timer in ended_timers
+        .timer
+          - timer_heading = timer.createdAtHumanize.replace('last ','').split(' ')[0]
+          if timer_heading != last_timer_heading
+            h3.content=timer_heading
+          - last_timer_heading = timer_heading
+          
+          h4=timer.body || '[no title]'
+          .time-left for #{timer.duration} at #{timer.createdAtTime} 
+            form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
+              input(type="hidden", name="_method", value="DELETE")
+              a.delete(href="#", class='delete', onclick="$(this).parents('form:first').submit();") delete
+      p
+        - if (next)
+          a(href="?page=#{next_page}") &laquo; earlier
+        - if (prev && next) 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        - if (prev)
+          a(href="?page=#{prev_page}") later &raquo;
 
 block tags
-  h3 Trends
-  each tag in tags
-    p
-      h4=tag['_id'] 
-      .time-left=tag['value']['count'] + ' times for ' + tag['value']['duration'] + ' minutes today'
+  if tags.length > 0
+    .well
+      h3 Today's Trends
+      each tag in tags
+        p
+          h4=tag['_id'] 
+          .time-left=tag['value']['count'] + (tag['value']['count'] == 1 ? ' time' : ' times') + ' for ' + tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes') + ' today'

@@ -19,7 +19,8 @@ body {
   width:280px;
 }
 
-.nav-pills li a {
+ul.nav {
+  margin-top:6px;
 }
 
 .muted a {
@@ -39,7 +40,7 @@ h3.content {
 }
 
 #doing {
-  width:225px;
+  width:240px;
 
 }
 
@@ -59,8 +60,9 @@ h3.content {
 #start-timer{display:none;}
 
 #clock {
-  margin-top:35px;
-  font-size:7.7em;
+  text-align: center;
+  margin-top:25px;
+  font-size:5.9em;
 }
 
 .interruption {

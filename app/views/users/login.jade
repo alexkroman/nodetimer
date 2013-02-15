@@ -1,14 +1,14 @@
 extends auth
 
-
 block auth
-  form(action="/users/session", method="post")
-    h2.form-signin-heading Please login
-    p.error= message
-    input.input-block-level#email(type='text', name="email", placeholder='Email address')
-    input.input-block-level#password(type='password', name="password", placeholder='Password')
-    br
-    button.btn.btn-primary(type='submit') Login
-    &nbsp;
-    | or&nbsp;
-    a.show-signup(href="/signup") sign up
+  .well
+    form(action="/users/session", method="post")
+      h2.form-signin-heading Please login
+      p.error= message
+      input.input-block-level#email(type='text', name="email", placeholder='Email address')
+      input.input-block-level#password(type='password', name="password", placeholder='Password')
+      br
+      button.btn.btn-primary(type='submit') Login
+      &nbsp;
+      | or&nbsp;
+      a.show-signup(href="/signup") sign up
