@@ -10,6 +10,8 @@ var TimerSchema = new Schema({
   , endedAt  : {type : Date, default : Date.now}
 })
 
+TimerSchema.index({user:1, endedAt:1})
+
 function toTags(val) {
   this.tags = val.match(/(#[A-Za-z0-9-_]+)/g)
   return val; 

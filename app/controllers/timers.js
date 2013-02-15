@@ -55,17 +55,14 @@ exports.index = function(req, res){
 
   Timer
   .find(options)
-  .populate('user', 'username')
   .sort({'endedAt': -1})
   .find()
   .paginate(page, limit, function (err, ended_timers, total) {
-    console.log(total)
     Timer
     .findOne({"user": req.user, "endedAt": {"$gt": new Date() }})
     .exec(function (err, open_timer) {
       next = (num < total) ? true : false
       prev = (num > limit) ? true : false
-      console.log('prev' + prev + 'next' + next)
       Timer.tags(options, function (err, tags) {
       console.log(tags)
       res.render('timers/index', {
@@ -88,7 +85,6 @@ exports.index = function(req, res){
 exports.timer = function(req, res, next, id){
   Timer
     .findOne({ _id : id })
-    .populate('user', 'name')
     .exec(function (err, timer) {
       req.timer = timer
       next()

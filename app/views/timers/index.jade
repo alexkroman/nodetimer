@@ -7,7 +7,7 @@ block form
 
   unless open_timer
     form.form-inline(method="post", action=action)
-      input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing?')=timer.body
+      input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing? #hash #tags')=timer.body
       script
         $('#doing').focus().select();
       br
