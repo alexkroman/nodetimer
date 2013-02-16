@@ -46,27 +46,41 @@ exports.index = function(req, res){
     return res.redirect('/login')
   }
 
-  page = parseInt(req.query['page']) || 1
-  num = page * limit
+  async.parallel({
+    tags: function(callback){
+      Timer.tags(req.user, function (err, tags) {
+        callback(err, tags);
+      });
+    },
+    ended_timers: function(callback){
+      page = parseInt(req.query['page']) || 1
+      Timer.endedTimers(req.user).paginate(page, limit, function (err, ended_timers, total) {
+        callback(err, ended_timers, total);
+      });
+    },
+    open_timer: function(callback) {
+      Timer.openTimer(req.user, function(err, open_timer) {
+        callback(err, open_timer);
+      });
+    },
+  },
 
-  Timer.endedTimers(req.user).paginate(page, limit, function (err, ended_timers, total) {
+  function(err, results, total){
+    num = page * limit
+    total = results['ended_timers'][1]
     next = (num < total) ? true : false
     prev = (num > limit) ? true : false
-    Timer.openTimer(req.user, function (err, open_timer) {
-      Timer.tags(req.user, function (err, tags) {
-        res.render('timers/index', {
-          title: 'Timers'
-          , page: page
-          , prev: prev
-          , next: next
-          , tags: tags
-          , next_page: page + 1
-          , prev_page: page - 1
-          , ended_timers: ended_timers
-          , open_timer: open_timer
-          , timer: new Timer({})
-        })
-      })
+    res.render('timers/index', {
+      title: 'Timers'
+      , page: page
+      , prev: prev
+      , next: next
+      , tags: results['tags']
+      , next_page: page + 1
+      , prev_page: page - 1
+      , ended_timers: results['ended_timers'][0]
+      , open_timer: results['open_timer']
+      , timer: new Timer({})
     })
   });
 
