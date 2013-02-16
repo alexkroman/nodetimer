@@ -25,7 +25,7 @@ TimerSchema
   .get(function(duration) {
     start = moment(this.createdAt)
     end = moment(this.endedAt)
-    return moment.humanizeDuration(end.diff(start,'minutes'), 'minutes')
+    return moment.duration(end.diff(start,'minutes'), 'minutes').humanize()
   })
 
 TimerSchema
