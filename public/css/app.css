@@ -67,9 +67,9 @@ h3.content {
 
 .interruption {
   font-size:1.2em;
-  line-height: 2.5em;
+  line-height: 2.3em;
   display:inline;
-
+  vertical-align:-2px;
 }
 
 h2 {
@@ -145,5 +145,8 @@ h4 {
 
 form.form-inline {
   margin-bottom: 0px;
+}
 
+.login-buttons {
+  margin-top:4px;
 }
