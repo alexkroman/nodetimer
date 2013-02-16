@@ -1,9 +1,9 @@
 {
-    "name": "noobjs"
-  , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
-  , "version": "3.0.0"
-  , "private": false
-  , "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)"
+    "name": "Node Timer"
+  , "description": "Timer app for developers"
+  , "version": "1.0.0"
+  , "private": true
+  , "author": "Alex Kroman <alexkroman@gmail.com> (http://alexkroman.com)"
   , "engines": {
         "node": "0.8.14"
       , "npm": "1.1.65"
@@ -24,7 +24,7 @@
     , "gzippo": "latest"
     , "async": "latest"
     , "nodemon": "latest"
-    , "moment": "1.6.0"
+    , "moment": "latest"
     , "newrelic": "latest"
     , "mongoose-pagination": "latest"
   }
