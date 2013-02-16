@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
@@ -32,7 +27,9 @@ module.exports = function (app, config, passport) {
     // express/mongo session storage
     app.use(express.session({
       secret: 'node-timer-alexkroman',
-      expires: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), 
+      cookie: {
+        maxAge: 2419200,
+      },
       store: new mongoStore({
         url: config.db,
         collection : 'sessions'
