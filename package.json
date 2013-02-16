@@ -26,6 +26,7 @@
     , "nodemon": "latest"
     , "moment": "latest"
     , "newrelic": "latest"
+    , "bunyan": "latest"
     , "mongoose-pagination": "latest"
   }
 }
