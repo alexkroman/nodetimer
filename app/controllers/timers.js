@@ -46,14 +46,13 @@ exports.index = function(req, res){
     return res.redirect('/login')
   }
 
-
   page = parseInt(req.query['page']) || 1
   num = page * limit
 
   Timer.endedTimers(req.user).paginate(page, limit, function (err, ended_timers, total) {
+    next = (num < total) ? true : false
+    prev = (num > limit) ? true : false
     Timer.openTimer(req.user, function (err, open_timer) {
-      next = (num < total) ? true : false
-      prev = (num > limit) ? true : false
       Timer.tags(req.user, function (err, tags) {
         res.render('timers/index', {
           title: 'Timers'
