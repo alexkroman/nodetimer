@@ -92,4 +92,4 @@ block tags
       each tag in tags
         p
           h4=tag['_id'] 
-          .time-left=tag['value']['count'] + (tag['value']['count'] == 1 ? ' time' : ' times') + ' for ' + tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes') + ' today'
+          .time-left=tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers') + ' for ' + tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
