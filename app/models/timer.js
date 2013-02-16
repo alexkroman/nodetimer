@@ -46,6 +46,10 @@ TimerSchema
     return moment(this.endedAt).fromNow()
   })
 
+TimerSchema.statics.openTimer = function(user, callback) {
+    return this.findOne({"user": user, "endedAt": {"$gt": new Date() }}, callback)
+}
+
 TimerSchema.statics.tags = function(options, callback) {
 
   var mapFunction = function() {

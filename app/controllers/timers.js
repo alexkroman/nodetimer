@@ -41,6 +41,7 @@ exports.stop = function(req, res){
 }
 
 exports.index = function(req, res){
+
   if (!req.isAuthenticated()) {
     return res.redirect('/login')
   }
@@ -53,41 +54,33 @@ exports.index = function(req, res){
   page = parseInt(req.query['page']) || 1
   num = page * limit
 
-  Timer
-  .find(options)
-  .sort({'endedAt': -1})
-  .find()
-  .paginate(page, limit, function (err, ended_timers, total) {
-    Timer
-    .findOne({"user": req.user, "endedAt": {"$gt": new Date() }})
-    .exec(function (err, open_timer) {
+  Timer.find(options).sort({'endedAt': -1}).find().paginate(page, limit, function (err, ended_timers, total) {
+    Timer.openTimer(req.user, function (err, open_timer) {
       next = (num < total) ? true : false
       prev = (num > limit) ? true : false
       Timer.tags(options, function (err, tags) {
-      console.log(tags)
-      res.render('timers/index', {
-        title: 'Timers'
-        , page: page
-        , prev: prev
-        , next: next
-        , tags: tags
-        , next_page: page + 1
-        , prev_page: page - 1
-        , ended_timers: ended_timers
-        , open_timer: open_timer
-        , timer: new Timer({})
+        res.render('timers/index', {
+          title: 'Timers'
+          , page: page
+          , prev: prev
+          , next: next
+          , tags: tags
+          , next_page: page + 1
+          , prev_page: page - 1
+          , ended_timers: ended_timers
+          , open_timer: open_timer
+          , timer: new Timer({})
+        })
       })
-})      
     })
   });
+
 }
 
 exports.timer = function(req, res, next, id){
-  Timer
-    .findOne({ _id : id })
-    .exec(function (err, timer) {
-      req.timer = timer
-      next()
-    })
+  Timer.findOne({ _id : id }).exec(function (err, timer) {
+    req.timer = timer
+    next()
+  })
 }
 
