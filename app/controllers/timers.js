@@ -46,19 +46,15 @@ exports.index = function(req, res){
     return res.redirect('/login')
   }
 
-  options = {
-    "endedAt": {"$lt": new Date() }
-    , "user": req.user._id 
-  }
 
   page = parseInt(req.query['page']) || 1
   num = page * limit
 
-  Timer.find(options).sort({'endedAt': -1}).find().paginate(page, limit, function (err, ended_timers, total) {
+  Timer.endedTimers(req.user).paginate(page, limit, function (err, ended_timers, total) {
     Timer.openTimer(req.user, function (err, open_timer) {
       next = (num < total) ? true : false
       prev = (num > limit) ? true : false
-      Timer.tags(options, function (err, tags) {
+      Timer.tags(req.user, function (err, tags) {
         res.render('timers/index', {
           title: 'Timers'
           , page: page

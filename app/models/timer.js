@@ -50,7 +50,20 @@ TimerSchema.statics.openTimer = function(user, callback) {
     return this.findOne({"user": user, "endedAt": {"$gt": new Date() }}, callback)
 }
 
-TimerSchema.statics.tags = function(options, callback) {
+TimerSchema.statics.endedTimers = function(user, callback) {
+  options = {
+    "endedAt": {"$lt": new Date() }
+    , "user": user
+  }
+  return this.find(options).sort({'endedAt': -1}).find(callback)
+}
+
+TimerSchema.statics.tags = function(user, callback) {
+
+  options = {
+    "endedAt": {"$lt": new Date() }
+    , "user": user._id 
+  }
 
   var mapFunction = function() {
     if (!this.tags) {
