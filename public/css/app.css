@@ -1,5 +1,6 @@
 body {
   background-color: #f5f5f5;
+  padding-bottom: 40px;
 }
 
 .well {
@@ -36,7 +37,7 @@ h3.title {
 }
 
 h3.content {
-  margin-bottom:0px;
+  margin-bottom:4px;
 }
 
 #doing {
@@ -160,4 +161,10 @@ h2 {
 h3 {
   font-size: 1.1em;
   padding-bottom:0;
+}
+
+.footer {
+  font-size:.9em;
+  color:#999;
+
 }

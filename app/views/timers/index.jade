@@ -92,18 +92,18 @@ block tags
         if (dailyTags.length == 0 || weeklyTags.length == 0)
           p Use #hash #tags to track trends.
         if dailyTags.length > 0
-          .timer
-            h3.content Today
-            each tag in dailyTags
+          h3.content Today
+          each tag in dailyTags
+            .timer
               h4=tag['_id'] 
               - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
-              - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
+              - duration = (tag['value']['duration'] == 0 ? ' a few seconds' : duration)
               .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
         if weeklyTags.length > 0
-          .timer
-            h3.content This week
-            each tag in weeklyTags
+          h3.content This week
+          each tag in weeklyTags
+            .timer
               h4=tag['_id'] 
               - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
-              - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
+              - duration = (tag['value']['duration'] == 0 ? ' a few seconds' : duration)
               .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
