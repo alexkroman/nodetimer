@@ -47,8 +47,13 @@ exports.index = function(req, res){
   }
 
   async.parallel({
-    tags: function(callback){
-      Timer.tags(req.user, function (err, tags) {
+    dailyTags: function(callback){
+      Timer.tags(req.user, 'day', function (err, tags) {
+        callback(err, tags);
+      });
+    },
+    weeklyTags: function(callback){
+      Timer.tags(req.user, 'week', function (err, tags) {
         callback(err, tags);
       });
     },
@@ -75,7 +80,8 @@ exports.index = function(req, res){
       , page: page
       , prev: prev
       , next: next
-      , tags: results['tags']
+      , dailyTags: results['dailyTags']
+      , weeklyTags: results['weeklyTags']
       , next_page: page + 1
       , prev_page: page - 1
       , ended_timers: results['ended_timers'][0]

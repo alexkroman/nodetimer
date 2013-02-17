@@ -150,3 +150,11 @@ form.form-inline {
 .login-buttons {
   margin-top:4px;
 }
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+}

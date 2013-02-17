@@ -59,6 +59,7 @@ block form
 
 block content
     .well
+      h2 Timers
       if ended_timers.length == 0
         h3 Today
         p No timers have gone off yet :(
@@ -86,10 +87,20 @@ block content
 
 block tags
     .well
-      h3 Today's Trends
-      if tags.length == 0
+      h2 Trends
+      if dailyTags.length == 0
         p Use #hash #tags to track trends.
-      each tag in tags
+      if dailyTags.length > 0
+        h3 Today
+      each tag in dailyTags
+        p
+          h4=tag['_id'] 
+          - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
+          - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
+          .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
+      if weeklyTags.length > 0
+        h3 This Week
+      each tag in weeklyTags
         p
           h4=tag['_id'] 
           - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')

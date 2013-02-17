@@ -58,12 +58,12 @@ TimerSchema.statics.endedTimers = function(user, callback) {
   return this.find(options).sort({'endedAt': -1}).find(callback)
 }
 
-TimerSchema.statics.tags = function(user, callback) {
+TimerSchema.statics.tags = function(user, startOf, callback) {
 
   var o = {};
 
   o.query = {
-    "endedAt": {"$lt": new Date() }
+    "endedAt": {"$lt": new Date(), "$gt": moment().startOf(startOf) }
     , "user": user._id 
   }
 
