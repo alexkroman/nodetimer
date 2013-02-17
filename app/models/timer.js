@@ -73,7 +73,7 @@ TimerSchema.statics.tags = function(user, callback) {
     }
      
     for (index in this.tags) {
-      emit(this.tags[index], {count: 1, duration: Math.floor((Math.abs(this.endedAt - this.createdAt)/1000)/60) + 1});
+      emit(this.tags[index], {count: 1, duration: Math.floor((Math.abs(this.endedAt - this.createdAt)/1000)/60)});
     }
   }
 
