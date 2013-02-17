@@ -1,12 +1,13 @@
 extends auth
 
 block auth
-  .well.login
-    h3 Analytics for your time
+  .well
+    h3 Welcome to Node Timer!
+    p Node timer helps you increase your focus time.
     ul
-      li Track time with Pomodoros
+      li Track your time with Pomodoros
       li Keep a log of your day
-      li See where you're spending your time
+      li See where you're time goes
   .well
     form(action="/users/session", method="post")
       h3 Please sign in

@@ -5,8 +5,7 @@ block main
 
 block content
   if (typeof errors !== 'undefined')
-    .fade.in.alert.alert-block.alert-error
-      a.close(data-dismiss="alert", href="javascript:void(0)") x
+    .alert.alert-block.alert-error
       ul
         each error in errors
           li= error.type
