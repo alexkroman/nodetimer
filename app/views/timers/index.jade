@@ -86,23 +86,24 @@ block content
           a(href="?page=#{prev_page}") later &raquo;
 
 block tags
-    .well
-      h2 Trends
-      if (dailyTags.length == 0 || weeklyTags.length == 0)
-        p Use #hash #tags to track trends.
-      if dailyTags.length > 0
-        h3 Today
-      each tag in dailyTags
-        p
-          h4=tag['_id'] 
-          - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
-          - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
-          .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
-      if weeklyTags.length > 0
-        h3 This week
-      each tag in weeklyTags
-        p
-          h4=tag['_id'] 
-          - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
-          - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
-          .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
+    if page == 1 
+      .well
+        h2 Trends
+        if (dailyTags.length == 0 || weeklyTags.length == 0)
+          p Use #hash #tags to track trends.
+        if dailyTags.length > 0
+          h3 Today
+        each tag in dailyTags
+          p
+            h4=tag['_id'] 
+            - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
+            - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
+            .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
+        if weeklyTags.length > 0
+          h3 This week
+        each tag in weeklyTags
+          p
+            h4=tag['_id'] 
+            - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
+            - duration = (tag['value']['duration'] == 0 ? 'just a few seconds' : duration)
+            .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')

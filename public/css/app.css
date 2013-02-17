@@ -36,7 +36,7 @@ h3.title {
 }
 
 h3.content {
-  margin-bottom:10px;
+  margin-bottom:5px;
 }
 
 #doing {
@@ -136,6 +136,7 @@ hr.no-top {
 
 h4 {
   font-weight: normal;
+  font-size: 1.1em;
 }
 
 .small {
@@ -152,9 +153,11 @@ form.form-inline {
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.1em;
+  border-bottom: 1px solid #eee;
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  padding-bottom:0;
 }
