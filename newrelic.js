@@ -9,6 +9,7 @@ exports.config = {
    * Array of application names.
    */
   app_name : ['Node Timer'],
+  apdex_t : 0.01,
   /**
    * Your New Relic license key.
    */
