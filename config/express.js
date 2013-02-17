@@ -23,6 +23,7 @@ module.exports = function (app, config, passport) {
     // bodyParser should be above methodOverride
     app.use(express.bodyParser())
     app.use(express.methodOverride())
+    app.use(express.compress())
 
     // express/mongo session storage
     app.use(express.session({
