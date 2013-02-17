@@ -60,12 +60,14 @@ TimerSchema.statics.endedTimers = function(user, callback) {
 
 TimerSchema.statics.tags = function(user, callback) {
 
-  options = {
+  var o = {};
+
+  o.query = {
     "endedAt": {"$lt": new Date() }
     , "user": user._id 
   }
 
-  var mapFunction = function() {
+  o.map = function() {
     if (!this.tags) {
       return;
     }
@@ -75,7 +77,7 @@ TimerSchema.statics.tags = function(user, callback) {
     }
   }
 
-  var reduceFunction = function(previous, current) {
+  o.reduce = function(previous, current) {
     var result = {count : 0, duration: 0}
 
     for (index in current) {
@@ -86,12 +88,8 @@ TimerSchema.statics.tags = function(user, callback) {
     return result;
   }
 
-  this.collection.mapReduce(
-    mapFunction.toString(),
-    reduceFunction.toString(),
-    { query: options, out: { inline: 1 } },
-    callback
-  );
+  this.mapReduce(o, callback);
+
 }
 
 mongoose.model('Timer', TimerSchema)
