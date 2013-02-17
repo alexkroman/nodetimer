@@ -88,7 +88,11 @@ TimerSchema.statics.tags = function(user, callback) {
     return result;
   }
 
-  this.mapReduce(o, callback);
+  o.out = 'tagResults'
+
+  this.mapReduce(o, function (err, model, stats) {
+    model.find().sort({'value.duration': -1}).exec(callback);
+  });
 
 }
 
