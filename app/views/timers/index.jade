@@ -89,7 +89,7 @@ block tags
     if page == 1 
       .well
         h2 Trends
-        if (dailyTags.length == 0 || weeklyTags.length == 0)
+        if (dailyTags.length == 0 && weeklyTags.length == 0)
           p No trends for this week.  Use #hash #tags to track trends.
         if dailyTags.length > 0
           h3.content Today
