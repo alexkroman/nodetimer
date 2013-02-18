@@ -2,7 +2,7 @@
 html
   meta(charset='utf-8')
   meta(name='viewport', content='width=device-width,initial-scale=1')
-  title= appName + ' - ' + title
+  title= title
   meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
   link(href='/favicon.ico', rel='shortcut icon', type='image/x-icon')
   link(rel='stylesheet', href='/css/bootstrap.min.css')
@@ -14,11 +14,11 @@ html
     .container
       ul.nav.pull-right
         if (req.isAuthenticated())
-          li
-            a(href="/logout", title="logout") Log out
+          a(href="/logout", title="logout") Sign out
         else
-          li
-            &nbsp;
+          a(href="/signup", title="sign up") Sign up
+          &nbsp;&middot;&nbsp;
+          a(href="/login", title="logout") Sign in
       h3.title.muted 
          a(href="/") Node Timer
       .row-fluid
@@ -29,7 +29,7 @@ html
           .footer
             |built by 
             a(href="http://twitter.com/alexkroman/")@alexkroman 
-            |in ne portland with node.js, mongo, and express.
+            |in sullivan's gulch, pdx.
 
 
   script(type='text/javascript', src='/js/app.js')

@@ -43,7 +43,9 @@ exports.stop = function(req, res){
 exports.index = function(req, res){
 
   if (!req.isAuthenticated()) {
-    return res.redirect('/login')
+    return res.render('timers/welcome', {
+      title: 'Minimize distractions with Node Timer'
+    })
   }
 
   async.parallel({
@@ -76,7 +78,7 @@ exports.index = function(req, res){
     next = (num < total) ? true : false
     prev = (num > limit) ? true : false
     res.render('timers/index', {
-      title: 'Timers'
+      title: 'Node Timer for ' + req.user.name
       , page: page
       , prev: prev
       , next: next

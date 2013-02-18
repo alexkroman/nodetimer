@@ -76,7 +76,7 @@ block content
           .time-left for #{timer.duration} at #{timer.createdAtTime} 
             form.form-inline(action="/timers/"+timer.id, method="post",style="display:inline;")
               input(type="hidden", name="_method", value="DELETE")
-              a.delete(href="#", class='delete', onclick="$(this).parents('form:first').submit();") delete
+              a.delete(href="#", class='delete', onclick="$(this).parents('form:first').submit();return false;") delete
       p
         - if (next)
           a(href="?page=#{next_page}") &laquo; earlier
@@ -90,7 +90,7 @@ block tags
       .well
         h2 Trends
         if (dailyTags.length == 0 || weeklyTags.length == 0)
-          p Use #hash #tags to track trends.
+          p No trends for this week.  Use #hash #tags to track trends.
         if dailyTags.length > 0
           h3.content Today
           each tag in dailyTags

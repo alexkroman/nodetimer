@@ -11,7 +11,7 @@ exports.authCallback = function (req, res, next) {
 // login
 exports.login = function (req, res) {
   res.render('users/login', {
-      title: 'Login'
+      title: 'Sign in to Node Timer'
     , message: req.flash('error')
   })
 }
@@ -19,7 +19,7 @@ exports.login = function (req, res) {
 // sign up
 exports.signup = function (req, res) {
   res.render('users/signup', {
-      title: 'Sign up'
+      title: 'Sign up for Node Timer'
     , user: new User()
   })
 }
