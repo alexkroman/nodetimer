@@ -29,7 +29,7 @@ module.exports = function (app, config, passport) {
     app.use(express.session({
       secret: 'node-timer-alexkroman',
       cookie: {
-        maxAge: 2419200,
+        maxAge: 14 * 24 * 3600000
       },
       store: new mongoStore({
         url: config.db,
