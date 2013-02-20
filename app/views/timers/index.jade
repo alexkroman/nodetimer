@@ -84,26 +84,3 @@ block content
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         - if (prev)
           a(href="?page=#{prev_page}") later &raquo;
-
-block tags
-    if page == 1 
-      .well
-        h2 Trends
-        if (dailyTags.length == 0 && weeklyTags.length == 0)
-          p No trends for this week.  Use #hash #tags to track trends.
-        if dailyTags.length > 0
-          h3.content Today
-          each tag in dailyTags
-            .timer
-              h4=tag['_id'] 
-              - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
-              - duration = (tag['value']['duration'] == 0 ? ' a few seconds' : duration)
-              .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
-        if weeklyTags.length > 0
-          h3.content This week
-          each tag in weeklyTags
-            .timer
-              h4=tag['_id'] 
-              - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
-              - duration = (tag['value']['duration'] == 0 ? ' a few seconds' : duration)
-              .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')

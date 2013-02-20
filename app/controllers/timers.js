@@ -6,16 +6,6 @@ var mongoose = require('mongoose')
 
 var limit = 80;
 
-exports.redirect = function(req, res, next) {
-  if (req.headers.host.match(/^www/) !== null ) {
-    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
-  } else if (req.headers.host.match(/^salty-bayou-8086/) !== null) {
-    res.redrect('http://nodetimer.com');
-  } else {
-    next();
-  }
-}
- 
 exports.create = function (req, res) {
   var timer = new Timer(req.body)
   timer.user = req.user
@@ -49,16 +39,6 @@ exports.index = function(req, res){
   }
 
   async.parallel({
-    dailyTags: function(callback){
-      Timer.tags(req.user, 'day', function (err, tags) {
-        callback(err, tags);
-      });
-    },
-    weeklyTags: function(callback){
-      Timer.tags(req.user, 'week', function (err, tags) {
-        callback(err, tags);
-      });
-    },
     ended_timers: function(callback){
       page = parseInt(req.query['page']) || 1
       Timer.endedTimers(req.user).paginate(page, limit, function (err, ended_timers, total) {
@@ -82,8 +62,6 @@ exports.index = function(req, res){
       , page: page
       , prev: prev
       , next: next
-      , dailyTags: results['dailyTags']
-      , weeklyTags: results['weeklyTags']
       , next_page: page + 1
       , prev_page: page - 1
       , ended_timers: results['ended_timers'][0]

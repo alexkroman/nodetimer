@@ -14,6 +14,10 @@ html
     .container
       ul.nav.pull-right
         if (req.isAuthenticated())
+          a(href="/", title="logout") Home
+          &nbsp;&middot;&nbsp;
+          a(href="/trends", title="logout") Trends
+          &nbsp;&middot;&nbsp;
           a(href="/logout", title="logout") Sign out
         else
           a(href="/signup", title="sign up") Sign up
