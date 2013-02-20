@@ -2,7 +2,6 @@ extends ../layouts/default
 
 block tags
   .well
-    h2 Trends
     if (dailyTags.length == 0 && weeklyTags.length == 0)
       p No trends yet for this week.  Use #hash #tags in your timers to track trends.
     if dailyTags.length > 0
