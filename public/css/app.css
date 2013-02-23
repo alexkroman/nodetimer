@@ -194,3 +194,8 @@ p.welcome {
   padding: 6px;
   border: 1px #ccc solid;
 }
+
+h1 {
+  font-size: 1.7em;
+
+}
