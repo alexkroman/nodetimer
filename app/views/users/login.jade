@@ -5,7 +5,7 @@ block auth
     form(action="/users/session", method="post")
       h3 Sign in to Node Timer
       p.error= message
-      input.input-block-level#email(type='text', name="email", placeholder='Email address')
+      input.input-block-level#email(type='text', autocapitalize="off", autocorrect="off", name="email", placeholder='Email address')
       input.input-block-level#password(type='password', name="password", placeholder='Password')
       .login-buttons
         button.btn.btn-primary(type='submit') Sign in
