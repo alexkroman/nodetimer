@@ -2,12 +2,18 @@ extends ../layouts/default
 
 block form
   .well
-    h2.noline Bye, bye interruptions!
     p Node Timer is simple timer designed to keep you focused.
-    ul
-      li Set a timer and focus until it goes off
-      li Keep a log of your day
-      li See how often you're interrupted
-      li Spend more time doing what you love
+    p.welcome
+      | 1. 
+      b Set a timer and focus
+      img(src="img/timer.jpg")
+    p.welcome 
+      | 2. 
+      b Keep a log of your day
+      img(src="img/log.jpg")
+    p.welcome 
+      | 3. 
+      b See where your time goes
+      img(src="img/trends.jpg")
     h3.sign-up-welcome
      a(href="/signup", title="sign up") Sign up for Node Timer
