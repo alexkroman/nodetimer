@@ -4,7 +4,7 @@ var express = require('express')
   , viewHelpers = require('./middlewares/view')
 
 module.exports = function (app, config, passport) {
-
+  app.use(require('stylus').middleware(config.root + '/public'));
   app.use(express.static(config.root + '/public'))
   app.use(express.logger('dev'))
 
