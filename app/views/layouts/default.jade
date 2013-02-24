@@ -12,19 +12,20 @@ html
   script(type='text/javascript', src='/js/soundmanager2-jsmin.js')
   body
     .container
-      ul.nav.pull-right
-        if (req.isAuthenticated())
-          a(href="/", title="logout") All
-          &nbsp;&middot;&nbsp;
-          a(href="/trends", title="logout") Trends
-          &nbsp;&middot;&nbsp;
-          a(href="/logout", title="logout") Sign out
-        else
-          a(href="/signup", title="sign up") Sign up
-          &nbsp;&middot;&nbsp;
-          a(href="/login", title="logout") Sign in
-      h3.title.muted 
-         a(href="/") Node Timer
+      .top-nav
+        .pull-right
+          if (req.isAuthenticated())
+            a(href="/", title="logout") All
+            &nbsp;&middot;&nbsp;
+            a(href="/trends", title="logout") Trends
+            &nbsp;&middot;&nbsp;
+            a(href="/logout", title="logout") Sign out
+          else
+            a(href="/signup", title="sign up") Sign up
+            &nbsp;&middot;&nbsp;
+            a(href="/login", title="logout") Sign in
+        .muted 
+           a(href="/") Node Timer
       .row-fluid
         .span12
           block form

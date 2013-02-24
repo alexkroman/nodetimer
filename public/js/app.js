@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  $('#doing').focus().select();
   $('#stop-timer').focus();
 
   soundManager.setup({
