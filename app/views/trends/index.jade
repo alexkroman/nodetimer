@@ -1,10 +1,11 @@
 extends ../layouts/default
 
 block tags
-  .well
-    if (dailyTags.length == 0 && weeklyTags.length == 0)
+  if (dailyTags.length == 0 && weeklyTags.length == 0)
+    .well
       p No trends yet for this week.  Use #hash #tags in your timers to track trends.
-    if dailyTags.length > 0
+  if dailyTags.length > 0
+    .well
       h3.content Today
       each tag in dailyTags
         .timer
@@ -12,7 +13,8 @@ block tags
           - duration = tag['value']['duration'] + (tag['value']['duration'] == 1 ? ' minute' : ' minutes')
           - duration = (tag['value']['duration'] == 0 ? ' a few seconds' : duration)
           .time-left= 'for ' + duration + ' and ' + tag['value']['count'] + (tag['value']['count'] == 1 ? ' timer' : ' timers')
-    if weeklyTags.length > 0
+  if weeklyTags.length > 0
+    .well
       h3.content This week
       each tag in weeklyTags
         .timer
