@@ -5,7 +5,6 @@ body {
 .well {
   background-color: #fff;
   padding: 14px;
-  margin-bottom: 12px;
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -131,7 +130,7 @@ h3 {
 }
 .footer {
   padding-left: 6px;
-  margin-top: -7px;
+  margin-top: -10px;
   font-size: 0.9em;
   color: #999;
 }

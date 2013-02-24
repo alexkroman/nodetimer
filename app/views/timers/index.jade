@@ -5,7 +5,7 @@ block form
     unless open_timer
       form.form-inline(method="post", action='/timers')
         p
-          input#desc(type='text', id="doing", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing? #hash #tags')=timer.body
+          input#desc(type='text', id="doing", autocapitalize="off", tabindex="1", name="body", value=ended_timers[0] ? ended_timers[0].body : '', placeholder='What are you doing? #hash #tags')=timer.body
         button.btn.btn-primary(type='submit', tabindex="3") Start
         .gray &nbsp; for &nbsp;
         input#desc.input-small(type='text', tabindex="2", name="duration", value="25", style='text-align:center;width:18px;')=timer.body
