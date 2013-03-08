@@ -1,18 +1,17 @@
-var mongoose = require('mongoose')
-  , async = require('async')
-  , pagination = require('mongoose-pagination')
-  , Timer = mongoose.model('Timer')
-  , _ = require('underscore')
+var mongoose = require('mongoose'),
+  async = require('async'),
+  pagination = require('mongoose-pagination'),
+  Timer = mongoose.model('Timer');
 
 var limit = 80;
 
 exports.create = function (req, res) {
-  var timer = new Timer(req.body)
-  timer.user = req.user
+  var timer = new Timer(req.body);
+  timer.user = req.user;
 
-  timer.save(function(err){
-    res.redirect('/')
-  })
+  timer.save(function(err) {
+    res.redirect('/');
+  });
 }
 
 exports.destroy = function(req, res){
