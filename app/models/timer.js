@@ -8,12 +8,12 @@ function toTags(val) {
 }
 
 var timerSchema = new Schema({
-  body: {type : String, "default": '', trim : true, set: toTags},
-  user: {type : Schema.ObjectId, ref : 'User'},
-  createdAt  : {type : Date, "default": Date.now},
-  tags : {type: [String]},
-  endedAt  : {type : Date, "default": Date.now}
-});
+    body: {type : String, 'default': '', trim : true, set: toTags},
+    user: {type : Schema.ObjectId, ref : 'User'},
+    createdAt  : {type : Date, "default": Date.now},
+    tags : {type: [String]},
+    endedAt  : {type : Date, "default": Date.now}
+  });
 
 timerSchema.index({user: 1, endedAt: 1});
 
@@ -41,6 +41,14 @@ timerSchema.virtual('timeLeft').get(function(timeLeft) {
 
 timerSchema.statics.openTimer = function(user, callback) {
   return this.findOne({"user": user, "endedAt": {"$gt": new Date() }}, callback);
+};
+
+timerSchema.statics.endedTimers = function(user, callback) {
+  var options = {
+    "endedAt": {"$lt": new Date() },
+    "user": user
+  };
+  return this.find(options).sort({'endedAt': -1}).find(callback);
 };
 
 timerSchema.statics.tags = function(user, startOf, callback) {
