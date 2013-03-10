@@ -19,7 +19,6 @@
     , "connect-flash": "latest"
     , "passport": "latest"
     , "passport-local": "latest"
-    , "passport-github": "latest"
     , "underscore": "latest"
     , "gzippo": "latest"
     , "async": "latest"
@@ -28,6 +27,7 @@
     , "newrelic": "latest"
     , "bunyan": "latest"
     , "stylus": "latest"
+    , "zombie": "latest"
     , "mongoose-pagination": "latest"
   }
 }
