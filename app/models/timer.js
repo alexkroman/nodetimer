@@ -65,17 +65,17 @@ timerSchema.statics.tags = function(user, startOf, callback) {
       return;
     }
 
-    for (var index in this.tags) {
-      emit(this.tags[index], {count: 1, duration: Math.floor((Math.abs(this.endedAt - this.createdAt)/1000)/60)});
+    for (i = 0; i < this.tags.length; i += 1) {
+      emit(this.tags[i], {count: 1, duration: Math.floor((Math.abs(this.endedAt - this.createdAt) / 1000) / 60)});
     }
   };
 
   o.reduce = function(previous, current) {
     var result = {count : 0, duration: 0};
 
-    for (var index in current) {
-        result.count += current[index].count;
-        result.duration += current[index].duration;
+    for (i = 0; i < current.length; i += 1) {
+      result.count += current[i].count;
+      result.duration += current[i].duration;
     }
 
     return result;
