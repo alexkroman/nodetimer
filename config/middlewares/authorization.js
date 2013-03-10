@@ -1,21 +1,21 @@
 exports.requiresLogin = function (req, res, next) {
   if (!req.isAuthenticated()) {
-    return res.redirect('/login')
+    return res.redirect('/login');
   }
-  next()
+  next();
 };
 
 exports.user = {
-    hasAuthorization : function (req, res, next) {
-      if (req.profile.id != req.user.id) {
-        return res.redirect('/users/'+req.profile.id)
-      }
-      next()
+  hasAuthorization : function (req, res, next) {
+    if (req.profile.id !== req.user.id) {
+      return res.redirect('/users/' + req.profile.id);
     }
-}
+    next();
+  }
+};
 
 exports.timer = {
-    hasAuthorization : function (req, res, next) {
-      next()
-    }
-}
+  hasAuthorization : function (req, res, next) {
+    next();
+  }
+};

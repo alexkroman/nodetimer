@@ -53,6 +53,7 @@ timerSchema.statics.endedTimers = function(user, callback) {
 
 timerSchema.statics.tags = function(user, startOf, callback) {
   var o = {};
+  var i = 0;
 
   o.query = {
     "endedAt": {"$lt": new Date(), "$gt": moment().startOf(startOf) },

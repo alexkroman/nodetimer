@@ -11,16 +11,16 @@ exports.authCallback = function (req, res, next) {
 // login
 exports.login = function (req, res) {
   res.render('users/login', {
-      title: 'Sign in to Node Timer',
-      message: req.flash('error')
+    title: 'Sign in to Node Timer',
+    message: req.flash('error')
   });
 };
 
 // sign up
 exports.signup = function (req, res) {
   res.render('users/signup', {
-      title: 'Sign up for Node Timer',
-      user: new User()
+    title: 'Sign up for Node Timer',
+    user: new User()
   });
 };
 
@@ -44,7 +44,9 @@ exports.create = function (req, res) {
       return res.render('users/signup', { errors: err.errors, user: user });
     }
     req.logIn(user, function(err) {
-      if (err) return next(err);
+      if (err) {
+        return next(err);
+      }
       return res.redirect('/');
     });
   });
@@ -54,8 +56,8 @@ exports.create = function (req, res) {
 exports.show = function (req, res) {
   var user = req.profile;
   res.render('users/show', {
-      title: user.name,
-      user: user
+    title: user.name,
+    user: user
   });
 };
 
@@ -64,8 +66,12 @@ exports.user = function (req, res, next, id) {
   User
     .findOne({ _id : id })
     .exec(function (err, user) {
-      if (err) return next(err);
-      if (!user) return next(new Error('Failed to load User ' + id));
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return next(new Error('Failed to load User ' + id));
+      }
       req.profile = user;
       next();
     });
