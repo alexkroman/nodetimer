@@ -2,7 +2,10 @@ var Browser = require("zombie");
 var assert = require("assert");
 
 var browser = new Browser({silent: true});
-browser.visit("http://localhost:3000/", function () {
+browser.visit("http://localhost:3000/", function (err, zombie) {
+  if (zombie.error) {
+    console.dir(zombie.errors);
+  }
 
   assert.ok(browser.success);
 
