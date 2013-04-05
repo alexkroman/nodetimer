@@ -1,3 +1,4 @@
+var contextify = require("contextify");
 var Browser = require("zombie");
 var assert = require("assert");
 
@@ -27,9 +28,14 @@ browser.visit("http://localhost:3000/", function (err, zombie) {
 
             assert.ok(browser.success);
 
-            browser.clickLink("Tags", function () {
-              assert.ok(browser.success);
-            });
+            browser
+              .pressButton("Stop", function() {
+
+                browser.clickLink("Tags", function () {
+                  assert.ok(browser.success);
+                });
+
+              });
 
           });
 
