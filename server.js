@@ -1,6 +1,3 @@
-/* Main application entry file. Please note, the order of loading is important.
- * Configuration loading and booting of controllers and custom error handlers */
-
 require('newrelic');
 
 var express = require('express'),
